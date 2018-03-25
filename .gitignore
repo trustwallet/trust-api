@@ -1,0 +1,23 @@
+# Ignore project IDE files
+.idea
+.vscode
+
+# Ignore node_modules
+node_modules
+
+# Ignore Mac OS X files
+.DS_Store
+
+# Ignore local notes folder
+notes
+
+# Ignore local logs
+*.log
+
+dist
+
+docker/data/
+
+# Ignore config enviroment
+config/test.json
+config/development.json
