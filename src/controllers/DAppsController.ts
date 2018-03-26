@@ -31,6 +31,29 @@ export class DAppsController {
         });
     }
 
+    public main(req: Request, res: Response) {
+
+        const validationErrors: any = DAppsController.validateQueryParameters(req);
+        if (validationErrors) {
+            sendJSONresponse(res, 400, validationErrors);
+            return;
+        }
+        const queryParams = DAppsController.extractQueryParameters(req);
+
+        DApp.paginate({}, {
+            populate: {
+                path: "category",
+                model: "DAppCategory"
+            }
+        }).then((items: any) => {
+            sendJSONresponse(res, 200, items);
+        }).catch((err: Error) => {
+            sendJSONresponse(res, 404, err);
+        });
+    }
+
+
+
     private static validateQueryParameters(req: Request) {
         req.checkQuery("page", "Page needs to be a number").optional().isNumeric();
         req.checkQuery("limit", "limit needs to be a number").optional().isNumeric();
