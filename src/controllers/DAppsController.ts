@@ -1,43 +1,40 @@
 import { Request, Response } from "express";
 import { DApp } from "../models/DAppModel";
 import * as xss from "xss-filters";
+import { sendJSONresponse } from "../common/Utils";
 import axios from "axios";
 const config = require("config");
 const _uniqBy = require("lodash.uniqby");
+
+const DAppCategory = require("../models/DAppCategory");
 
 export class DAppsController {
 
     public readAll(req: Request, res: Response) {
 
-        // validate query input
-        // const validationErrors: any = TokenController.validateQueryParameters(req);
-        // if (validationErrors) {
-        //     sendJSONresponse(res, 400, validationErrors);
-        //     return;
-        // }
+        const validationErrors: any = DAppsController.validateQueryParameters(req);
+        if (validationErrors) {
+            sendJSONresponse(res, 400, validationErrors);
+            return;
+        }
+        const queryParams = DAppsController.extractQueryParameters(req);
 
-        // // extract query parameters
-        // const queryParams = TokenController.extractQueryParameters(req);
-        // const address = queryParams.address.toLowerCase();
-        // const query: any = {
-        //     address: address
-        // };
-
-        // TokenController.getRemoteTokens(address).then((tokens: any) => {
-        //     if (tokens) {
-        //         sendJSONresponse(res, 200, {
-        //             docs: tokens
-        //         });
-        //     } else {
-        //         sendJSONresponse(res, 404, "Balances for tokens could not be found.");
-        //     }
-        // });
+        DApp.paginate({}, {
+            populate: {
+                path: "category",
+                model: "DAppCategory"
+            }
+        }).then((items: any) => {
+            sendJSONresponse(res, 200, items);
+        }).catch((err: Error) => {
+            sendJSONresponse(res, 404, err);
+        });
     }
 
     private static validateQueryParameters(req: Request) {
         req.checkQuery("page", "Page needs to be a number").optional().isNumeric();
         req.checkQuery("limit", "limit needs to be a number").optional().isNumeric();
-        req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
+        //req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
 
         return req.validationErrors();
     }

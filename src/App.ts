@@ -12,7 +12,7 @@ import { Config } from "./common/Config";
 
 const config = require("config");
 const cors = require("cors");
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8002;
 
 export class App {
 
