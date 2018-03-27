@@ -19,19 +19,23 @@ export class DAppsController {
         }
         const queryParams = DAppsController.extractQueryParameters(req);
 
-        DApp.paginate({}, {
-            populate: {
-                path: "category",
-                model: "DAppCategory"
-            }
-        }).then((items: any) => {
+        DAppsController.list({}).then((items: any) => {
             sendJSONresponse(res, 200, items);
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
         });
     }
 
-    public main(req: Request, res: Response) {
+    public static list(query: any): Promise<any> {
+        return DApp.paginate(query, {
+            populate: {
+                path: "category",
+                model: "DAppCategory"
+            }
+        })
+    }
+
+    public bootstrap(req: Request, res: Response) {
 
         const validationErrors: any = DAppsController.validateQueryParameters(req);
         if (validationErrors) {
@@ -40,19 +44,20 @@ export class DAppsController {
         }
         const queryParams = DAppsController.extractQueryParameters(req);
 
-        DApp.paginate({}, {
-            populate: {
-                path: "category",
-                model: "DAppCategory"
-            }
-        }).then((items: any) => {
-            sendJSONresponse(res, 200, items);
+        Promise.all([
+            DAppsController.list({}), 
+            DAppsController.list({}),, 
+            DAppsController.list({}),
+        ]).then( (values) => {
+            sendJSONresponse(res, 200, {
+                today: values[0].docs,
+                popular: values[0].docs,
+                new: values[0].docs,
+            })
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
         });
     }
-
-
 
     private static validateQueryParameters(req: Request) {
         req.checkQuery("page", "Page needs to be a number").optional().isNumeric();

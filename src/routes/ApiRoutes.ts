@@ -7,6 +7,7 @@ const dAppsController = new DAppsController();
 const priceController = new TokenPriceController();
 
 router.get("/dapps", dAppsController.readAll);
+router.get("/dapps/bootstrap", dAppsController.bootstrap);
 router.post("/tokenPrices", priceController.getTokenPrices);
 
 export {
