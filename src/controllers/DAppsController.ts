@@ -47,8 +47,8 @@ export class DAppsController {
 
         Promise.all([
             DAppsController.list({}, {sort: { name: -1}, limit: 3}), 
-            DAppsController.list({}),
-            DAppsController.list({}),
+            DAppsController.list({}, {limit: 30}),
+            DAppsController.list({}, {limit: 30}),
         ]).then( (values) => {
             sendJSONresponse(res, 200, {
                 today: values[0].docs,
