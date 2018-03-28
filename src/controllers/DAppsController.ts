@@ -27,17 +27,16 @@ export class DAppsController {
     }
 
     public static list(query: any, options: any = {}): Promise<any> {
-        return DApp.paginate(query, {
+        return DApp.paginate({...query, enabled: true}, {
             populate: {
                 path: "category",
                 model: "DAppCategory"
             },
-            ...options
+            ...options,
         })
     }
 
     public bootstrap(req: Request, res: Response) {
-
         const validationErrors: any = DAppsController.validateQueryParameters(req);
         if (validationErrors) {
             sendJSONresponse(res, 400, validationErrors);
