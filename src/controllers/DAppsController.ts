@@ -45,7 +45,7 @@ export class DAppsController {
         const queryParams = DAppsController.extractQueryParameters(req);
 
         Promise.all([
-            DAppsController.list({}, {sort: { name: -1}, limit: 3}), 
+            DAppsController.list({}, {sort: { createdAt: -1}, limit: 3}), 
             DAppsController.list({}, {limit: 30}),
             DAppsController.list({}, {limit: 30}),
         ]).then( (values) => {
