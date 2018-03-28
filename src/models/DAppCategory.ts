@@ -9,6 +9,9 @@ const scheme = new Schema({
     image: {
         type: String,
     },
+    order: {
+        type: Number,
+    }
 }, {
     versionKey: false,
 });
