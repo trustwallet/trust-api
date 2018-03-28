@@ -19,19 +19,20 @@ export class DAppsController {
         }
         const queryParams = DAppsController.extractQueryParameters(req);
 
-        DAppsController.list({}).then((items: any) => {
+        DAppsController.list({}, queryParams).then((items: any) => {
             sendJSONresponse(res, 200, items);
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
         });
     }
 
-    public static list(query: any): Promise<any> {
+    public static list(query: any, options: any = {}): Promise<any> {
         return DApp.paginate(query, {
             populate: {
                 path: "category",
                 model: "DAppCategory"
-            }
+            },
+            ...options
         })
     }
 
@@ -45,14 +46,14 @@ export class DAppsController {
         const queryParams = DAppsController.extractQueryParameters(req);
 
         Promise.all([
-            DAppsController.list({}), 
-            DAppsController.list({}),, 
+            DAppsController.list({}, {sort: { name: -1}, limit: 3}), 
+            DAppsController.list({}),
             DAppsController.list({}),
         ]).then( (values) => {
             sendJSONresponse(res, 200, {
                 today: values[0].docs,
-                popular: values[0].docs,
-                new: values[0].docs,
+                popular: values[1].docs,
+                new: values[2].docs,
             })
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
