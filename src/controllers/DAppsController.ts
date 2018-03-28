@@ -26,6 +26,20 @@ export class DAppsController {
         });
     }
 
+    public byID(req: Request, res: Response) {
+        const validationErrors: any = DAppsController.validateQueryParameters(req);
+        if (validationErrors) {
+            sendJSONresponse(res, 400, validationErrors);
+            return;
+        }
+        const queryParams = DAppsController.extractQueryParameters(req);
+        DApp.findOne({_id: req.params.id}).populate('category').then((item: any) => {
+            sendJSONresponse(res, 200, item);
+        }).catch((err: Error) => {
+            sendJSONresponse(res, 404, err);
+        });
+    }
+
     public static list(query: any, options: any = {}): Promise<any> {
         return DApp.paginate({...query, enabled: true}, {
             populate: {
