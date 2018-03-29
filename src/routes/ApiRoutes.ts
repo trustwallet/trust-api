@@ -7,8 +7,8 @@ const dAppsController = new DAppsController();
 const priceController = new TokenPriceController();
 
 router.get("/dapps", dAppsController.readAll);
-//router.get("/dapps/:id", dAppsController.byID);
-router.get("/dapps/bootstrap", dAppsController.bootstrap);
+router.get("/dapps/:id", dAppsController.byID);
+router.get("/dapps/category/:id", dAppsController.byCategoryID);
 router.get("/dapps-bootstrap", dAppsController.bootstrap);
 router.post("/tokenPrices", priceController.getTokenPrices);
 
