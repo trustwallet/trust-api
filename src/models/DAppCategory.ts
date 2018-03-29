@@ -11,6 +11,9 @@ const scheme = new Schema({
     },
     order: {
         type: Number,
+    },
+    slug: {
+        type: String
     }
 }, {
     versionKey: false,
