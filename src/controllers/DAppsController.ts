@@ -49,7 +49,7 @@ export class DAppsController {
         
         Promise.all([
             DAppCategory.findOne({_id: req.params.id}),
-            DAppsController.list({category: req.params.id}, {limit: 30})
+            DAppsController.list({category: req.params.id}, {limit: 30, sort: {createdAt: -1}})
         ]).then( (values) => {
             sendJSONresponse(res, 200, {
                 category: values[0],
