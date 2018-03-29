@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import { DApp } from "../models/DAppModel";
+import { DAppCategory } from "../models/DAppCategory";
 import * as xss from "xss-filters";
 import { sendJSONresponse } from "../common/Utils";
 import axios from "axios";
 const config = require("config");
 const _uniqBy = require("lodash.uniqby");
-
-const DAppCategory = require("../models/DAppCategory");
 
 export class DAppsController {
 
@@ -47,8 +46,15 @@ export class DAppsController {
             return;
         }
         const queryParams = DAppsController.extractQueryParameters(req);
-        DAppsController.list({category: req.params.id}, {limit: 30}).then((item: any) => {
-            sendJSONresponse(res, 200, item);
+        
+        Promise.all([
+            DAppCategory.findOne({_id: req.params.id}),
+            DAppsController.list({category: req.params.id}, {limit: 30})
+        ]).then( (values) => {
+            sendJSONresponse(res, 200, {
+                category: values[0],
+                docs: values[1].docs,
+            })
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
         });
