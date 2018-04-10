@@ -39,9 +39,10 @@ const scheme = new Schema({
 
 scheme.options.toJSON = {
     transform: (doc: any, ret: any, options: any) => {
-        //delete ret._id;
         delete ret.__v;
         delete ret.enabled;
+        delete ret.createdAt;
+        delete ret.updatedAt;
         return ret;
     }
 };
