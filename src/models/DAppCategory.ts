@@ -14,6 +14,9 @@ const scheme = new Schema({
     },
     slug: {
         type: String
+    },
+    limit: {
+        type: Number
     }
 }, {
     versionKey: false,

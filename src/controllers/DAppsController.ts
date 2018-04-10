@@ -114,7 +114,7 @@ export class DAppsController {
     }
 
     public static getCategoryElements(category: any): Promise<any> {
-        return DAppsController.list({category: category._id}, {sort: {createdAt: -1}}).then((results: any) => {
+        return DAppsController.list({category: category._id}, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
             return Promise.resolve({category, results: results.docs})
         }).catch((error: Error) => {
             return Promise.reject(error)
