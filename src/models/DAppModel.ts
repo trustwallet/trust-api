@@ -28,6 +28,9 @@ const scheme = new Schema({
         ref: "DAppCategory",
         type: Schema.Types.ObjectId
     }],
+    networks: [{
+        type: Number
+    }],
     enabled: {
         type: Boolean,
         default: false
