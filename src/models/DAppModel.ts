@@ -26,10 +26,12 @@ const scheme = new Schema({
     },
     category: [{
         ref: "DAppCategory",
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        index: true
     }],
     networks: [{
-        type: Number
+        type: Number,
+        index: true
     }],
     enabled: {
         type: Boolean,

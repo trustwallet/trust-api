@@ -9,36 +9,6 @@ const _uniqBy = require("lodash.uniqby");
 
 export class DAppsController {
 
-    public readAll(req: Request, res: Response) {
-
-        const validationErrors: any = DAppsController.validateQueryParameters(req);
-        if (validationErrors) {
-            sendJSONresponse(res, 400, validationErrors);
-            return;
-        }
-        const queryParams = DAppsController.extractQueryParameters(req);
-
-        DAppsController.list({}, queryParams).then((items: any) => {
-            sendJSONresponse(res, 200, items);
-        }).catch((err: Error) => {
-            sendJSONresponse(res, 404, err);
-        });
-    }
-
-    public byID(req: Request, res: Response) {
-        const validationErrors: any = DAppsController.validateQueryParameters(req);
-        if (validationErrors) {
-            sendJSONresponse(res, 400, validationErrors);
-            return;
-        }
-        const queryParams = DAppsController.extractQueryParameters(req);
-        DApp.findOne({_id: req.params.id}).populate('category').then((item: any) => {
-            sendJSONresponse(res, 200, item);
-        }).catch((err: Error) => {
-            sendJSONresponse(res, 404, err);
-        });
-    }
-
     public byCategoryID(req: Request, res: Response) {
         const validationErrors: any = DAppsController.validateQueryParameters(req);
         if (validationErrors) {
@@ -46,10 +16,11 @@ export class DAppsController {
             return;
         }
         const queryParams = DAppsController.extractQueryParameters(req);
-        
+        const network = parseInt(req.query.network) || 1
+
         Promise.all([
             DAppCategory.findOne({_id: req.params.id}),
-            DAppsController.list({category: req.params.id}, {limit: 30, sort: {createdAt: -1}})
+            DAppsController.list({category: req.params.id, networks: {$in: [network]}}, {limit: 30, sort: {createdAt: -1}})
         ]).then( (values) => {
             sendJSONresponse(res, 200, {
                 category: values[0],
@@ -61,36 +32,13 @@ export class DAppsController {
     }
 
     public static list(query: any, options: any = {}): Promise<any> {
-        return DApp.paginate({...query, enabled: true}, {
+        return DApp.paginate({...query,}, {
             populate: {
                 path: "category",
                 model: "DAppCategory"
             },
             ...options,
         })
-    }
-
-    public bootstrap(req: Request, res: Response) {
-        const validationErrors: any = DAppsController.validateQueryParameters(req);
-        if (validationErrors) {
-            sendJSONresponse(res, 400, validationErrors);
-            return;
-        }
-        const queryParams = DAppsController.extractQueryParameters(req);
-
-        Promise.all([
-            DAppsController.list({}, {sort: { createdAt: -1}, limit: 3}), 
-            DAppsController.list({}, {sort: {createdAt: -1}, limit: 30}),
-            DAppsController.list({}, {sort: {createdAt: -1}, limit: 30}),
-        ]).then( (values) => {
-            sendJSONresponse(res, 200, {
-                today: values[0].docs,
-                popular: values[1].docs,
-                new: values[2].docs,
-            })
-        }).catch((err: Error) => {
-            sendJSONresponse(res, 404, err);
-        });
     }
 
     public main(req: Request, res: Response) {
@@ -100,21 +48,25 @@ export class DAppsController {
             return;
         }
         const queryParams = DAppsController.extractQueryParameters(req);
+        const network = parseInt(req.query.network) || 1
 
         DAppCategory.find({}).sort({order: 1}).then((results: any) => {
             let promises = results.map((category: any) => {
-                return DAppsController.getCategoryElements(category)
+                return DAppsController.getCategoryElements(category, network)
             })
             return Promise.all(promises).then((results) => {
-                sendJSONresponse(res, 200, {docs: results})
+                const filtered = results.filter((item: any) => {
+                    return item.results.length > 0
+                });
+                sendJSONresponse(res, 200, {docs: filtered})
             })
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
         });
     }
 
-    public static getCategoryElements(category: any): Promise<any> {
-        return DAppsController.list({category: category._id}, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
+    public static getCategoryElements(category: any, network: number): Promise<any> {
+        return DAppsController.list({category, networks: {$in: [network]}}, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
             return Promise.resolve({category, results: results.docs})
         }).catch((error: Error) => {
             return Promise.reject(error)
@@ -123,7 +75,7 @@ export class DAppsController {
 
     private static validateQueryParameters(req: Request) {
         req.checkQuery("page", "Page needs to be a number").optional().isNumeric();
-        req.checkQuery("limit", "limit needs to be a number").optional().isNumeric();
+        req.checkQuery("limit", "limit needs to be a number").optional( ).isNumeric();
         //req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
 
         return req.validationErrors();
