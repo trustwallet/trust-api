@@ -66,7 +66,10 @@ export class DAppsController {
     }
 
     public static getCategoryElements(category: any, network: number): Promise<any> {
-        return DAppsController.list({category, networks: {$in: [network]}}, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
+        return DAppsController.list({category, $or:[
+            {networks: { $in: [network]}},
+            {networks: []}, 
+        ] }, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
             return Promise.resolve({category, results: results.docs})
         }).catch((error: Error) => {
             return Promise.reject(error)
