@@ -13,7 +13,7 @@ router.get("/dapps/main", dAppsController.main);
 router.get("/dapps/category/:id", dAppsController.byCategoryID);
 router.post("/tokenPrices", priceController.getTokenPrices);
 
-router.post("/appcheck/android", appCheck.android);
+router.get("/appcheck/android", appCheck.android);
 
 export {
     router
