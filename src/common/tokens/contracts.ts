@@ -1267,6 +1267,9 @@ export const contracts = {
      },
      "0x998b3b82bc9dba173990be7afb772788b5acb8bd": {
          id: "banca"
+     },
+     "0x949bed886c739f1a3273629b3320db0c5024c719": {
+         id: "amis"
      }
 }
 
