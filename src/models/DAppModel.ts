@@ -36,6 +36,10 @@ const scheme = new Schema({
     enabled: {
         type: Boolean,
         default: false
+    },
+    digitalGood: {
+        type: Boolean,
+        default: false
     }
 }, {
     versionKey: false,
