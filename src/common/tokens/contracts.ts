@@ -1685,7 +1685,7 @@ export const contracts = {
     "0xa9d2927d3a04309e008b6af6e2e282ae2952e7fd": {
         id: "zip"
     },
-    "0x1dEa979ae76f26071870F824088dA78979eb91C8": {
+    "0x1dea979ae76f26071870f824088da78979eb91c8": {
         id: "spindle"
     },
     "0x3adfc4999f77d04c8341bac5f3a76f58dff5b37a": {
@@ -1693,5 +1693,38 @@ export const contracts = {
     },
     "0x949bed886c739f1a3273629b3320db0c5024c719": {
         id: "amis"
+    },
+    "0x3893b9422cd5d70a81edeffe3d5a1c6a978310bb": {
+        id: "mithril"
+    },
+    "0xea26c4ac16d4a5a106820bc8aee85fd0b7b2b664": {
+        id: "quarkchain"
+    },
+    "0x6175f6f85339f1e56affac5a68cbf8297969004d": {
+        id: "shopin"
+    },
+    "0xb9bb08ab7e9fa0a1356bd4a39ec0ca267e03b0b3": {
+        id: "pchain"
+    },
+    "0xb6ed7644c69416d67b522e20bc294a9a9b405b31": {
+        id: "0xbtc"
+    },
+    "0x84f7c44b6fed1080f647e354d552595be2cc602f": {
+        id: "bigbom"
+    },
+    "0xc528c28fec0a90c083328bc45f587ee215760a0f": {
+        id: "endor-protocol"
+    },
+    "0xa4ea687a2a7f29cf2dc66b39c68e4411c0d00c49": {
+        id: "ivy"
+    },
+    "0xac0741127cac11e4455c7943b654bcced7fdd5a4": {
+        id: "ejoy"
+    },
+    "0xb1eef147028e9f480dbc5ccaa3277d417d1b85f0": {
+        id: "seele"
+    },
+    "0x697beac28b09e122c4332d163985e8a73121b97f": {
+        id: "quantum-resistant-ledger"
     }
 }
