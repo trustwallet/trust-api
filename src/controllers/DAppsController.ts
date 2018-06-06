@@ -17,10 +17,14 @@ export class DAppsController {
         }
         const queryParams = DAppsController.extractQueryParameters(req);
         const network = parseInt(req.query.network) || 1
-
+        const digitalGood = DAppsController.isDigitalGood(req)
         Promise.all([
             DAppCategory.findOne({_id: req.params.id}),
-            DAppsController.list({category: req.params.id, networks: {$in: [network]}}, {limit: 30, sort: {createdAt: -1}})
+            DAppsController.list({
+                category: req.params.id, 
+                networks: {$in: [network]},
+                digitalGood: {$in: digitalGood},
+            }, {limit: 30, sort: {createdAt: -1}})
         ]).then( (values) => {
             sendJSONresponse(res, 200, {
                 category: values[0],
@@ -29,6 +33,13 @@ export class DAppsController {
         }).catch((err: Error) => {
             sendJSONresponse(res, 404, err);
         });
+    }
+
+    public static isDigitalGood(req: Request): boolean[] {
+        if (req.query.os === "iOS") {
+            return [false]
+        }
+        return [true, false]
     }
 
     public static list(query: any, options: any = {}): Promise<any> {
@@ -49,10 +60,11 @@ export class DAppsController {
         }
         const queryParams = DAppsController.extractQueryParameters(req);
         const network = parseInt(req.query.network) || 1
+        const digitalGood = DAppsController.isDigitalGood(req)
 
         DAppCategory.find({}).sort({order: 1}).then((results: any) => {
             let promises = results.map((category: any) => {
-                return DAppsController.getCategoryElements(category, network)
+                return DAppsController.getCategoryElements(category, network, digitalGood)
             })
             return Promise.all(promises).then((results) => {
                 const filtered = results.filter((item: any) => {
@@ -65,10 +77,14 @@ export class DAppsController {
         });
     }
 
-    public static getCategoryElements(category: any, network: number): Promise<any> {
-        return DAppsController.list({category, $or:[
-            {networks: { $in: [network]}},
-            {networks: []}, 
+    public static getCategoryElements(category: any, network: number, digitalGood: boolean[]): Promise<any> {
+        return DAppsController.list({
+            category,
+            digitalGood: {$in: digitalGood},
+            $or:[
+                {networks: { $in: [network]}},
+                {networks: [],
+            },
         ] }, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
             return Promise.resolve({category, results: results.docs})
         }).catch((error: Error) => {
