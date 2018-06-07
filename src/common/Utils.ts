@@ -1,7 +1,4 @@
 import { Response } from "express";
-import * as winston from "winston";
-import { Config } from "./Config";
-const axios = require("axios");
 
 /**
  * Fills the status and JSOn data into a response object.
