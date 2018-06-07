@@ -3,6 +3,9 @@ import { DApp } from "../models/DAppModel";
 import { DAppCategory } from "../models/DAppCategory";
 import * as xss from "xss-filters";
 import { sendJSONresponse } from "../common/Utils";
+import axios from "axios";
+const config = require("config");
+const _uniqBy = require("lodash.uniqby");
 
 export class DAppsController {
 
@@ -48,7 +51,7 @@ export class DAppsController {
         const network = parseInt(req.query.network) || 1
 
         DAppCategory.find({}).sort({order: 1}).then((results: any) => {
-            const promises = results.map((category: any) => {
+            let promises = results.map((category: any) => {
                 return DAppsController.getCategoryElements(category, network)
             })
             return Promise.all(promises).then((results) => {
@@ -63,9 +66,9 @@ export class DAppsController {
     }
 
     public static getCategoryElements(category: any, network: number): Promise<any> {
-        return DAppsController.list({category, $or: [
+        return DAppsController.list({category, $or:[
             {networks: { $in: [network]}},
-            {networks: []},
+            {networks: []}, 
         ] }, {sort: {createdAt: -1}, limit: category.limit}).then((results: any) => {
             return Promise.resolve({category, results: results.docs})
         }).catch((error: Error) => {
@@ -76,7 +79,7 @@ export class DAppsController {
     private static validateQueryParameters(req: Request) {
         req.checkQuery("page", "Page needs to be a number").optional().isNumeric();
         req.checkQuery("limit", "limit needs to be a number").optional( ).isNumeric();
-        // req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
+        //req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
 
         return req.validationErrors();
     }
