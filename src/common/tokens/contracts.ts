@@ -1729,5 +1729,38 @@ export const contracts = {
     },
     "0xfd1e80508f243e64ce234ea88a5fd2827c71d4b7": {
         id: "medx"
+    },
+    "0xb5dbc6d3cf380079df3b27135664b6bcf45d1869": {
+        id: "shivom"
+    },
+    "0x0e8d6b471e332f140e7d9dbb99e5e3822f728da6": {
+        id: "the-abyss"
+    },
+    "0x81b4d08645da11374a03749ab170836e4e539767": {
+        id: "paymon"
+    },
+    "0xcdb7ecfd3403eef3882c65b761ef9b5054890a47": {
+        id: "hurify"
+    },
+    "0x3209f98bebf0149b769ce26d71f7aea8e435efea": {
+        id: "traxia"
+    },
+    "0xaf8a215e81faea7c180ce22b72483525121813bd": {
+        id: "engine"
+    },
+    "0x2d9765a94ff22e0ca3afc3e3f4b116de2b67582a": {
+        id: "cgc-token"
+    },
+    "0x26db5439f651caf491a87d48799da81f191bdb6b": {
+        id: "cashbet-coin"
+    },
+    "0xb056c38f6b7dc4064367403e26424cd2c60655e1": {
+        id: "ceek-vr"
+    },
+    "0x75c5ee419331b6150879530d06f9ba054755f1da": {
+        id: "salpay"
+    },
+    "0xf091cf09c51811819db705710e9634b8bf18f164": {
+        id: "couchain"
     }
 }
