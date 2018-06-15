@@ -18,7 +18,7 @@ export class TokenPriceController {
 
     getTokenPrices = (req: Request, res: Response) => {
         const supportedCurrency: string[] = ["AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR", "USD"]
-        const currency: string = supportedCurrency.indexOf[req.body.currency.toUpperCase()] == -1 ? "USD" : req.body.currency.toUpperCase();
+        const currency: string = supportedCurrency.indexOf(req.body.currency.toUpperCase()) == -1 ? "USD" : req.body.currency.toUpperCase();
         const tokens = req.body.tokens;
 
         this.getRemotePrices(currency).then((prices: any) => {
