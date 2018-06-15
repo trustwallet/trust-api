@@ -1,24 +1,24 @@
 import { Request, Response } from "express";
 import { sendJSONresponse } from "../common/Utils";
 import * as winston from "winston";
-const axios = require("axios");
 import * as BluebirbPromise from "bluebird";
-import { Config } from "../common/Config";
-import { IToken, IPrice } from "./Interfaces/ITokenPriceController";
+import { IToken, IPrice, ICurrency } from "./Interfaces/ITokenPriceController";
 import { contracts } from "../common/tokens/contracts";
 
 const CoinMarketCap = require("coinmarketcap-api");
 
 export class TokenPriceController {
     private client = new CoinMarketCap();
-    private refreshLimit = 600;
-    private lastUpdated: any = {};
-    private latestPrices: any = {};
-    private isUpdating: any = {};
+    private refreshLimit: number = 600
+    private lastestCoefficients: {[key: string]: number} = {}
+    private coefficientUpdated: {[key: string]: number} = {}
+    private latestUSDPrices: IPrice[] = []
+    private isUpdating: {[key: string]: boolean} = {}
     private githubImageURL: string = "https://raw.githubusercontent.com/TrustWallet/tokens/master/images/";
 
     getTokenPrices = (req: Request, res: Response) => {
-        const currency = req.body.currency || "USD";
+        const supportedCurrency: string[] = ["AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR", "USD"]
+        const currency: string = supportedCurrency.indexOf[req.body.currency.toUpperCase()] == -1 ? "USD" : req.body.currency.toUpperCase();
         const tokens = req.body.tokens;
 
         this.getRemotePrices(currency).then((prices: any) => {
@@ -35,10 +35,10 @@ export class TokenPriceController {
     }
 
     private filterTokenPrices(prices: any[], tokens: IToken[], currency: string): any {
-        const altContract = "0x0000000000000000000000000000000000000000"; // ETH, EHC, POA, CLO
-        const pricesCoinmarket = prices[0];
-        const pricesMap: IPrice[] = pricesCoinmarket.reduce((map: any, obj: any) => {
-            map[obj.id] = obj;
+        const coefficient: number = prices[1]
+        const altContract: string = "0x0000000000000000000000000000000000000000"; // ETH, EHC, POA, CLO
+        const pricesMap: IPrice[] = prices[0].reduce((map: any, ticker: any) => {
+            map[ticker["website_slug"]] = ticker;
             return map;
         }, {});
 
@@ -49,36 +49,39 @@ export class TokenPriceController {
             "CLO": "callisto-network"
         }
 
-        const result1 = tokens.map((token: IToken) => {
-            const contract: string = token.contract;
-            const contractLowerCase: string = token.contract.toLowerCase();
-            const symbol: string = token.symbol;
-            const currencyLowerCase = currency.toLowerCase()
+        return tokens.map((token: IToken) => {
+            const contract: string = token.contract.toLowerCase()
+            const symbol: string = token.symbol.toUpperCase()
 
             if (contract === altContract && altValues.hasOwnProperty(symbol)) {
-                const id = altValues[token.symbol];
-                const tokenPrice: IPrice = pricesMap[id];
-                const price = tokenPrice["price_" + currencyLowerCase]
+                const slug = altValues[token.symbol];
+                const tokenPrice: IPrice = pricesMap[slug];
+                const currencyPrice: any = tokenPrice.quotes.USD
+                const price: string = (currencyPrice.price / coefficient).toString()
+                const percent_change_24h: string = (currencyPrice.percent_change_24h / coefficient).toString() || "0"
+
                 return {
-                    id: tokenPrice.id,
+                    id: tokenPrice["website_slug"],
                     name: tokenPrice.name,
                     symbol,
                     price,
-                    percent_change_24h: tokenPrice.percent_change_24h || "0",
-                    contract: contract,
+                    percent_change_24h,
+                    contract,
                     image: this.getImageUrl(token.contract),
                 }
-            } else if (contracts.hasOwnProperty(contractLowerCase)) {
-                const id = contracts[contractLowerCase].id;
-                const tokenPrice: any = pricesMap[id] || {};
-                const price = tokenPrice["price_" + currencyLowerCase];
+            } else if (contracts.hasOwnProperty(contract)) {
+                const slug = contracts[contract].id;
+                const tokenPrice: any = pricesMap[slug] || {};
+                const currencyPrice = tokenPrice.quotes.USD
+                const price: string = (currencyPrice.price / coefficient).toString() || ""
+                const percent_change_24h: string = currencyPrice.percent_change_24h ? (currencyPrice.percent_change_24h / coefficient).toString() : "0"
 
                 return {
-                    id: tokenPrice.id || "",
+                    id: tokenPrice["website_slug"] || "",
                     name: tokenPrice.name || "",
                     symbol: token.symbol || "",
-                    price: price || "",
-                    percent_change_24h: tokenPrice.percent_change_24h || "0",
+                    price,
+                    percent_change_24h,
                     contract,
                     image: this.getImageUrl(contract),
                 }
@@ -94,54 +97,92 @@ export class TokenPriceController {
                 }
              }
         })
-
-        return result1;
     }
 
     private getImageUrl(contract: string): string {
         return `${this.githubImageURL}${contract.toLowerCase()}.png`;
     }
 
-    private async getRemotePrices(currency: string) {
-            const now = Date.now();
-            const lastUpdatedTime = this.lastUpdated[currency] || 0;
-            const difference = (now - lastUpdatedTime) / 1000;
-
-            const isUpdating = this.isUpdating[currency] || false;
-            if ((this.lastUpdated === 0 || difference >= this.refreshLimit) && !isUpdating) {
-                this.isUpdating[currency] = true;
-
-                try {
-                    const prices = await this.getCoinMarketCapPrices(currency).timeout(6000);
-
-                    this.lastUpdated[currency] = now;
-                    this.latestPrices[currency] = prices;
-                    this.isUpdating[currency] = false;
-                    return [this.latestPrices[currency]];
-
-                } catch (error) {
-                    winston.error("getRemotePrices ", error);
-
-                    this.isUpdating[currency] = false;
-
-                    return new BluebirbPromise((resolve, reject) => {
-                        reject((this.latestPrices[currency] || []));
-                    });
-                }
-            } else {
-                return new BluebirbPromise(resolve => {
-                    resolve([this.latestPrices[currency]])
-                })
-            }
+    private async updateUSDPrices() {
+        winston.info(`Updating USD prices ... `)
+        try {
+            this.isUpdating.USD = true
+            const prices: any = await this.getAllTokensPricesInUSD().timeout(6000);
+            this.latestUSDPrices = prices.data
+            this.lastestCoefficients.USD = 1
+            this.coefficientUpdated.USD = Date.now()
+            this.isUpdating.USD = false
+        } catch (error) {
+            winston.error(`Error updating USD prices`, error)
+        }
     }
 
-    private getCoinMarketCapPrices(currency: string) {
+    private async updateCoefficietns(currency: string) {
+        winston.info(`Updating coefficient for currency`, currency)
+        try {
+            this.isUpdating[currency] = true
+            this.lastestCoefficients[currency] = await this.getCoefficient(currency)
+            this.coefficientUpdated[currency] = Date.now()
+            this.isUpdating[currency] = false
+        } catch (error) {
+            winston.error(`Error updating coefficient for currency ${currency}`, error)
+        }
+    }
+
+    private isUSDUpdated(): boolean {
+        const lastUpdatedTime: number = this.coefficientUpdated.USD || 0
+        const difference: number = (Date.now() - lastUpdatedTime) / 1000
+        const isUpdating: boolean = this.isUpdating.USD || false
+        return !(difference >= this.refreshLimit) && !isUpdating
+    }
+
+    private isCoefficientUpdated(currency: string): boolean {
+        const lastUpdatedTime: number = this.coefficientUpdated[currency] || 0
+        const difference: number = Math.floor((lastUpdatedTime - this.coefficientUpdated.USD) / 1000)
+        const isUpdating: boolean = this.isUpdating[currency] || false
+        return Number.isInteger(difference) && Math.abs(difference) <= this.refreshLimit && !isUpdating
+    }
+
+    private async getRemotePrices(currency: string): Promise<[IPrice[], number]> {
+        try {
+            if (this.isUSDUpdated()) {
+                if (currency === "USD" ) return [this.latestUSDPrices, 1]
+
+                if (this.isCoefficientUpdated(currency)) {
+                    return [this.latestUSDPrices, this.lastestCoefficients[currency]]
+                }
+
+                await this.updateCoefficietns(currency)
+                return this.getRemotePrices(currency)
+            } else {
+                await this.updateUSDPrices()
+                return this.getRemotePrices(currency)
+            }
+        } catch (error) {
+            winston.error(`Error getRemotePrices `, error)
+            Promise.reject(error)
+        }
+
+    }
+
+    private getAllTokensPricesInUSD() {
         return new BluebirbPromise((resolve, reject) => {
-            this.client.getTicker({limit: 0, convert: currency}).then((prices: any) => {
+            this.client.getTicker({limit: 0, structure: "array"}).then((prices: any) => {
                 resolve(prices);
             }).catch((error: Error) => {
                 reject(error);
             });
         });
+    }
+
+    private async getCoefficient(currency: string): Promise<number> {
+        try {
+            const prices = await this.client.getTicker({limit: 1, convert: currency, structure: "array"})
+                const quotes: ICurrency = prices.data[0].quotes
+                const coefficient: number = quotes.USD.price / quotes[currency].price
+                return coefficient
+        } catch (error) {
+            Promise.reject(`Error getting coefficient for currecny "${currency}" ${error}`)
+        }
     }
 }
