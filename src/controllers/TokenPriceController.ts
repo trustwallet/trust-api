@@ -151,7 +151,7 @@ export class TokenPriceController {
                 const slug = altValues[token.symbol];
                 const tokenPrice: IPriceDB = pricesMap[slug];
                 const price: string = (tokenPrice.price / coefficient).toString()
-                const percent_change_24h: string = (tokenPrice.percent_change_24h / coefficient).toString() || "0"
+                const percent_change_24h: string = tokenPrice.percent_change_24h.toString() || "0"
 
                 return {
                     id: tokenPrice["website_slug"],
@@ -163,10 +163,10 @@ export class TokenPriceController {
                     image: this.getImageUrl(token.contract),
                 }
             } else if (contracts.hasOwnProperty(contract)) {
-                const slug = contracts[contract].id;
+                const slug: string = contracts[contract].id;
                 const tokenPrice: any = pricesMap[slug] || {};
                 const price: string = (tokenPrice.price / coefficient).toString() || ""
-                const percent_change_24h: string = tokenPrice.percent_change_24h ? (tokenPrice.percent_change_24h / coefficient).toString() : "0"
+                const percent_change_24h: string = tokenPrice.percent_change_24h.toString() || "0"
 
                 return {
                     id: tokenPrice["website_slug"] || "",
@@ -226,16 +226,11 @@ export class TokenPriceController {
         }
     }
 
-    private updateCurrencyCoeffiientInDB(currency: string, coefficient: number) {
-        const updateOptions = {
-            upsert: true,
-            new: true
-        }
-        try {
-            return CurrencyCoefficient.findOneAndUpdate({currency}, {coefficient}, updateOptions)
-        } catch (error) {
-            winston.error(`Error updating coefficient for currency ${currency}`, error)
-        }
+    private async updateCurrencyCoeffiientInDB(currency: string, coefficient: number) {
+        return await CurrencyCoefficient.findOneAndUpdate({currency}, {coefficient}, {upsert: true, new: true})
+            .catch((error: Error) => {
+                winston.error(`Error updating coefficient for currency ${currency}`, error)
+            })
     }
 
     private getImageUrl(contract: string): string {
