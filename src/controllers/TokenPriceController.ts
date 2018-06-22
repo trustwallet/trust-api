@@ -150,8 +150,8 @@ export class TokenPriceController {
             if (contract === altContract && altValues.hasOwnProperty(symbol)) {
                 const slug = altValues[token.symbol];
                 const tokenPrice: IPriceDB = pricesMap[slug];
-                const price: string = (tokenPrice.price / coefficient).toString()
-                const percent_change_24h: string = (tokenPrice.percent_change_24h).toString() || "0"
+                const price: string = tokenPrice.price ? (tokenPrice.price / coefficient).toString() : "0"
+                const percent_change_24h: string = tokenPrice.percent_change_24h ? (tokenPrice.percent_change_24h).toString() : "0"
 
                 return {
                     id: tokenPrice["website_slug"],
@@ -165,8 +165,8 @@ export class TokenPriceController {
             } else if (contracts.hasOwnProperty(contract)) {
                 const slug: string = contracts[contract].id;
                 const tokenPrice: any = pricesMap[slug] || {};
-                const price: string = (tokenPrice.price / coefficient).toString() || ""
-                const percent_change_24h: string = (tokenPrice.percent_change_24h).toString() || "0"
+                const price: string = tokenPrice.price ? (tokenPrice.price / coefficient).toString() : "0"
+                const percent_change_24h: string = tokenPrice.percent_change_24h ? (tokenPrice.percent_change_24h).toString() : "0"
 
                 return {
                     id: tokenPrice["website_slug"] || "",
