@@ -151,7 +151,7 @@ export class TokenPriceController {
                 const slug = altValues[token.symbol];
                 const tokenPrice: IPriceDB = pricesMap[slug];
                 const price: string = (tokenPrice.price / coefficient).toString()
-                const percent_change_24h: string = tokenPrice.percent_change_24h.toString() || "0"
+                const percent_change_24h: string = (tokenPrice.percent_change_24h).toString() || "0"
 
                 return {
                     id: tokenPrice["website_slug"],
@@ -166,7 +166,7 @@ export class TokenPriceController {
                 const slug: string = contracts[contract].id;
                 const tokenPrice: any = pricesMap[slug] || {};
                 const price: string = (tokenPrice.price / coefficient).toString() || ""
-                const percent_change_24h: string = tokenPrice.percent_change_24h.toString() || "0"
+                const percent_change_24h: string = (tokenPrice.percent_change_24h).toString() || "0"
 
                 return {
                     id: tokenPrice["website_slug"] || "",
