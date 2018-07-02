@@ -26,12 +26,12 @@ export class TokenInfo {
             const tokensInfos = wallets.map(w => this.tokensInfo[network][w]).filter(w => w)
 
             sendJSONresponse(res, 200, {
-                statis: true,
+                status: true,
                 response: tokensInfos
             })
         } catch (error) {
             sendJSONresponse(res, 500, {
-                statis: true,
+                status: true,
                 error
             })
         }
