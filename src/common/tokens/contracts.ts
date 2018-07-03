@@ -1813,5 +1813,8 @@ export const contracts = {
     },
     "0xc86d054809623432210c107af2e3f619dcfbf652": {
         id: "sentinel-protocol"
+    },
+    "0x906b3f8b7845840188eab53c3f5ad348a787752f": {
+        id: "dorado"
     }
 }
