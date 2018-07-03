@@ -1823,6 +1823,7 @@ export const contracts = {
     "0x8e1b448ec7adfc7fa35fc2e885678bd323176e34": {
         id: "egretia"
     },
+    "0xb9ef770b6a5e12e45983c5d80545258aa38f3b78": {
         id: "0chain"
     },
     "0xa2a54f1ec1f09316ef12c1770d32ed8f21b1fb6a": {
