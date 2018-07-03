@@ -1816,5 +1816,16 @@ export const contracts = {
     },
     "0x906b3f8b7845840188eab53c3f5ad348a787752f": {
         id: "dorado"
+    },
+    "0x9cda8a60dd5afa156c95bd974428d91a0812e054": {
+        id: "tatatu"
+    },
+    "0x8e1b448ec7adfc7fa35fc2e885678bd323176e34": {
+        id: "egretia"
+    },
+        id: "0chain"
+    },
+    "0xa2a54f1ec1f09316ef12c1770d32ed8f21b1fb6a": {
+        id: "digifinextoken"
     }
 }
