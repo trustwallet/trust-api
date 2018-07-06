@@ -11,7 +11,7 @@ export class TokenInfo {
     private supportedNetworks: {[key: string]: string} = {
         "ethereum": "eth",
         "ropsten": "rop",
-        "rinliby": "rin",
+        "rinkeby": "rin",
         "kovan": "kov",
     }
 
