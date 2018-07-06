@@ -2,7 +2,7 @@ import  * as express from "express";
 import { DAppsController } from "../controllers/DAppsController";
 import { TokenPriceController } from "../controllers/TokenPriceController";
 import { AppCheck } from "../controllers/AppCheck";
-import { TokenInfo } from "../controllers/tokeninfo/TokenInfo";
+import { TokenInfo } from "../controllers/TokenInfo";
 
 const router = express.Router();
 
