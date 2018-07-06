@@ -21,7 +21,7 @@ export class DAppsController {
         Promise.all([
             DAppCategory.findOne({_id: req.params.id}),
             DAppsController.list({
-                category: req.params.id, 
+                category: req.params.id,
                 networks: {$in: [network]},
                 digitalGood: {$in: digitalGood},
             }, {limit: 30, sort: {createdAt: -1}})
@@ -63,7 +63,7 @@ export class DAppsController {
         const digitalGood = DAppsController.isDigitalGood(req)
 
         DAppCategory.find({}).sort({order: 1}).then((results: any) => {
-            let promises = results.map((category: any) => {
+            const promises = results.map((category: any) => {
                 return DAppsController.getCategoryElements(category, network, digitalGood)
             })
             return Promise.all(promises).then((results) => {
@@ -81,7 +81,7 @@ export class DAppsController {
         return DAppsController.list({
             category,
             digitalGood: {$in: digitalGood},
-            $or:[
+            $or: [
                 {networks: { $in: [network]}},
                 {networks: [],
             },
@@ -95,7 +95,7 @@ export class DAppsController {
     private static validateQueryParameters(req: Request) {
         req.checkQuery("page", "Page needs to be a number").optional().isNumeric();
         req.checkQuery("limit", "limit needs to be a number").optional( ).isNumeric();
-        //req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
+        // req.checkQuery("address", "address needs to be alphanumeric").isAlphanumeric();
 
         return req.validationErrors();
     }
