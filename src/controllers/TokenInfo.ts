@@ -4,30 +4,35 @@ import * as winston from "winston";
 import Axios from "axios";
 import { validationResult } from "express-validator/check"
 import { ITokenInfo } from "./Interfaces/ITokenInfo";
+import { constants } from "http2";
 
 export class TokenInfo {
     private tokensInfo: {[key: string]: {[key: string]: ITokenInfo[]}} = {}
-    private supportedNetworks: string[] = ["etc", "eth", "kov", "rin", "rop"]
+    private supportedNetworks: {[key: number]: string} = {
+        1: "eth",
+        3: "rop",
+        4: "rin",
+        43: "kov",
+    }
 
     public getTokenInfo = async (req: Request, res: Response) => {
         try {
             const validationErrors = this.validateQueryParameters(req)
+            console.log("params", req.params)
             if (validationErrors) {
-                sendJSONresponse(res, 400, validationErrors)
-                return
+                return sendJSONresponse(res, 400, validationErrors)
             }
-            const wallets = req.body.wallets
-            const network = req.body.network
+            const address: string = req.params.address
+            const network: string = req.params.networkid
+            const networkIdName: string = this.supportedNetworks[network]
 
-            if (!this.tokensInfo.hasOwnProperty(network)) {
+            if (!this.tokensInfo.hasOwnProperty(networkIdName)) {
                 await this.getTokens(network)
             }
 
-            const tokensInfos = wallets.map(w => this.tokensInfo[network][w]).filter(w => w)
-
             sendJSONresponse(res, 200, {
                 status: true,
-                response: tokensInfos
+                response: this.tokensInfo[networkIdName][address]
             })
         } catch (error) {
             sendJSONresponse(res, 500, {
@@ -39,8 +44,10 @@ export class TokenInfo {
 
     public getTokens = (network: string) => {
         try {
+            const networkIdName: string = this.supportedNetworks[network]
+
             return new Promise(async (resolve) => {
-                const tokens = await Axios.get(`https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/tokens/tokens-${network}.json`)
+                const tokens = await Axios.get(`https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/tokens/tokens-${networkIdName}.json`)
 
                 const networkTokens = tokens.data.reduce((acc, val) => {
                     const tokenObj: {[key: string]: ITokenInfo} = {}
@@ -48,19 +55,20 @@ export class TokenInfo {
                     Object.assign(acc, tokenObj)
                     return acc
                 }, {})
-                Object.assign(this.tokensInfo, {[network]: networkTokens})
+
+                Object.assign(this.tokensInfo, {[networkIdName]: networkTokens})
                 winston.info(`Tokens info loaded`)
                 resolve()
             })
         } catch (error) {
-            winston.info(`Error fetching tokens`, error)
+            winston.error(`Error fetching tokens`, error)
             Promise.reject(error)
         }
     }
 
     private validateQueryParameters(req: Request) {
-        req.checkBody("network", "Must be 3 characters long").isLength({max: 3, min: 3})
-        req.checkBody("network", `Suppoted networks ${this.supportedNetworks}`).isIn(this.supportedNetworks)
+        req.checkParams("address", "Must be 42 characters long").isLength({max: 42, min: 42}).isAlphanumeric().optional()
+        // req.checkQuery("network", `Suppoted networks ${this.supportedNetworks}`).isIn(this.supportedNetworks)
 
         return req.validationErrors();
     }
