@@ -1828,5 +1828,8 @@ export const contracts = {
     },
     "0xa2a54f1ec1f09316ef12c1770d32ed8f21b1fb6a": {
         id: "digifinextoken"
+    },
+    "0x1ed7ae1f0e2fa4276dd7ddc786334a3df81d50c0": {
+        id: "forty-seven-bank"
     }
 }
