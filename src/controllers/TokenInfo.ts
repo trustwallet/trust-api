@@ -30,10 +30,16 @@ export class TokenInfo {
                 await this.getTokens(network)
             }
 
-            sendJSONresponse(res, 200, {
-                status: true,
-                response: this.tokensInfo[networkAbbriviation][address.toLowerCase()]
-            })
+            const addressInfo = this.tokensInfo[networkAbbriviation][address.toLowerCase()]
+
+            if (addressInfo) {
+                sendJSONresponse(res, 200, {
+                    status: true,
+                    response: addressInfo
+                })
+            } else {
+                throw `No info avalible for address ${address}`
+            }
         } catch (error) {
             sendJSONresponse(res, 500, {
                 status: true,
