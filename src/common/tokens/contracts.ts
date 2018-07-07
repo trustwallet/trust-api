@@ -1831,5 +1831,38 @@ export const contracts = {
     },
     "0x1ed7ae1f0e2fa4276dd7ddc786334a3df81d50c0": {
         id: "forty-seven-bank"
+    }, 
+    "0x4f27053f32eda8af84956437bc00e5ffa7003287": {
+        id: "thrive-token"
+    },
+    "0x423b5f62b328d0d6d44870f4eee316befa0b2df5": {
+        id: "gonetwork"
+    },
+    "0x378903a03fb2c3ac76bb52773e3ce11340377a32": {
+        id: "clipper-coin"
+    },
+    "0xdf2c7238198ad8b389666574f2d8bc411a4b7428": {
+        id: "mainframe"
+    },
+    "0x6863be0e7cf7ce860a574760e9020d519a8bdc47": {
+        id: "on-live"
+    },
+    "0xa86a0da9d05d0771955df05b44ca120661af16de": {
+        id: "otcbtc-token"
+    },
+    "0xb07ec2c28834b889b1ce527ca0f19364cd38935c": {
+        id: "cardstack"
+    },
+    "0x8E5610ab5E39d26828167640EA29823fe1dD5843": {
+        id: "kanadecoin"
+    },
+    "0xdf347911910b6c9a4286ba8e2ee5ea4a39eb2134": {
+        id: "bobs-repair"
+    },
+    "0x4d9e23a3842fe7eb7682b9725cf6c507c424a41b": {
+        id: "carblock"
+    },
+    "0x4aac461c86abfa71e9d00d9a2cde8d74e4e1aeea": {
+        id: "zinc"
     }
 }
