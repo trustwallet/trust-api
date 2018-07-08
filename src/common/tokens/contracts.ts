@@ -1864,5 +1864,8 @@ export const contracts = {
     },
     "0x4aac461c86abfa71e9d00d9a2cde8d74e4e1aeea": {
         id: "zinc"
+    },
+    "0xfc05987bd2be489ACCF0f509E44B0145d68240f7": {
+        id: "essentia"
     }
 }
