@@ -1867,5 +1867,8 @@ export const contracts = {
     },
     "0xfc05987bd2be489ACCF0f509E44B0145d68240f7": {
         id: "essentia"
+    },
+    "0xf3586684107ce0859c44aa2b2e0fb8cd8731a15a": {
+        id: "karatgold-coin"
     }
 }
