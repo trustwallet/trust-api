@@ -17,4 +17,18 @@ export class AppCheck {
             }
         )
     }
+
+    public ios(req: Request, res: Response) {
+        const version = "1.66.0"
+        const build = 252
+        sendJSONresponse(res, 200, {
+            "latestVersion": version,
+            "latestVersionCode": build,
+            "url": "https://itunes.apple.com/us/app/trust-ethereum-wallet/id1288339409?mt=8",
+            "title": "Update Available",
+            "description": "A new version of Trust Wallet is available. Please Update to version " + version,
+            "force": false
+            },
+        )
+    }
 }
