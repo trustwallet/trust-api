@@ -1831,7 +1831,7 @@ export const contracts = {
     },
     "0x1ed7ae1f0e2fa4276dd7ddc786334a3df81d50c0": {
         id: "forty-seven-bank"
-    }, 
+    },
     "0x4f27053f32eda8af84956437bc00e5ffa7003287": {
         id: "thrive-token"
     },
@@ -1870,5 +1870,77 @@ export const contracts = {
     },
     "0xf3586684107ce0859c44aa2b2e0fb8cd8731a15a": {
         id: "karatgold-coin"
+    },
+    "0x765f0c16d1ddc279295c1a7c24b0883f62d33f75": {
+        id: "data-exchange"
+    },
+    "0x6a27348483d59150ae76ef4c0f3622a78b0ca698": {
+        id: "beekan"
+    },
+    "0x865ec58b06bf6305b886793aa20a2da31d034e68": {
+        id: "mossland"
+    },
+    "0x5b135d7e2774c801a73208f258123d7623e07784": {
+        id: "saifu"
+    },
+    "0x4375e7ad8a01b8ec3ed041399f62d9cd120e0063": {
+        id: "bit-z-token"
+    },
+    "0xf4b54874cd8a6c863e3a904c18fda964661ec363": {
+        id: "dws"
+    },
+    "0x83e2be8d114f9661221384b3a50d24b96a5653f5": {
+        id: "0xcert"
+    },
+    "0x64a60493d888728cf42616e034a0dfeae38efcf0": {
+        id: "oneledger"
+    },
+    "0x97aeb5066e1a590e868b511457beb6fe99d329f5": {
+        id: "atonomi"
+    },
+    "0x57ab1e02fee23774580c119740129eac7081e9d3": {
+        id: "nusd"
+    },
+    "0x986ee2b944c42d017f52af21c4c69b84dbea35d8": {
+        id: "bitmart-token"
+    },
+    "0x44449fa4d607f807d1ed4a69ad942971728391c8": {
+        id: "xmct"
+    },
+    "0x57e299ee8f1c5a92a9ed54f934acc7ff5f159699": {
+        id: "record"
+    },
+    "0xf4faea455575354d2699bc209b0a65ca99f69982": {
+        id: "no-bs-crypto"
+    },
+    "0x2c949199cff14aeaf1b33d64db01f48fb57f592f": {
+        id: "coni"
+    },
+    "0x943ed852dadb5c3938ecdc6883718df8142de4c8": {
+        id: "fanstime"
+    },
+    "0xe3f4b4a5d91e5cb9435b947f090a319737036312": {
+        id: "popchain"
+    },
+    "0x0f1ed66c251bcb52ecf7e67ac64bb72482048adb": {
+        id: "seer"
+    },
+    "0xd37532d304214d588aeeac4c365e8f1d72e2304a": {
+        id: "fcoin-token"
+    },
+    "0xfc05987bd2be489accf0f509e44b0145d68240f7": {
+        id: "essentia"
+    },
+    "0x2bba3cf6de6058cc1b4457ce00deb359e2703d7f": {
+        id: "hashcoin"
+    },
+    "0x02f61fd266da6e8b102d4121f5ce7b992640cf98": {
+        id: "likecoin"
+    },
+    "0xd9a12cde03a86e800496469858de8581d3a5353d": {
+        id: "crowdholding"
+    },
+    "0xac2e58a06e6265f1cf5084ee58da68e5d75b49ca": {
+        id: "ors-group"
     }
 }
