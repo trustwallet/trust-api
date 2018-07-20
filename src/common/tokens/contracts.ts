@@ -1942,5 +1942,8 @@ export const contracts = {
     },
     "0xac2e58a06e6265f1cf5084ee58da68e5d75b49ca": {
         id: "ors-group"
+    },
+    "0x464ebe77c293e473b48cfe96ddcf88fcf7bfdac0": {
+        id: "kryll"
     }
 }
