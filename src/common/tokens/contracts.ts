@@ -1997,5 +1997,8 @@ export const contracts = {
     },
     "0x05aaaa829afa407d83315cded1d45eb16025910c": {
         id: "sp8de"
+    },
+    "0x4c0fbe1bb46612915e7967d2c3213cd4d87257ad": {
+        id: "apis"
     }
 }
