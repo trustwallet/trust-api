@@ -1946,7 +1946,7 @@ export const contracts = {
     "0x464ebe77c293e473b48cfe96ddcf88fcf7bfdac0": {
         id: "kryll"
     },
-    //Coins. Based on the slip
+    // Coins. Based on the slip
     "0x000000000000000000000000000000000000003c": {
         id: "ethereum"
     },
@@ -1961,5 +1961,41 @@ export const contracts = {
     },
     "0x00000000000000000000000000000000000017ac": {
         id: "gochain"
+    },
+    "0x60c24407d01782c2175d32fe7c8921ed732371d1": {
+        id: "lemochain"
+    },
+    "0xdb455c71c1bc2de4e80ca451184041ef32054001": {
+        id: "jury-online-token"
+    },
+    "0xa95592dcffa3c080b4b40e459c5f5692f67db7f8": {
+        id: "elysian"
+    },
+    "0x63f584fa56e60e4d0fe8802b27c7e6e3b33e007f": {
+        id: "contentbox"
+    },
+    "0x4689a4e169eb39cc9078c0940e21ff1aa8a39b9c": {
+        id: "proton-token"
+    },
+    "0xb4efd85c19999d84251304bda99e90b92300bd93": {
+        id: "rocket-pool"
+    },
+    "0xf8e06e4e4a80287fdca5b02dccecaa9d0954840f": {
+        id: "tgame"
+    },
+    "0x5dbac24e98e2a4f43adc0dc82af403fca063ce2c": {
+        id: "engagement-token"
+    },
+    "0x1b793e49237758dbd8b752afc9eb4b329d5da016": {
+        id: "vite"
+    },
+    "0x5c64031c62061865e5fd0f53d3cdaef80f72e99d": {
+        id: "hashgard"
+    },
+    "0x24dcc881e7dd730546834452f21872d5cb4b5293": {
+        id: "scroll"
+    },
+    "0x05aaaa829afa407d83315cded1d45eb16025910c": {
+        id: "sp8de"
     }
 }
