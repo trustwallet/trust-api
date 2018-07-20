@@ -1945,5 +1945,21 @@ export const contracts = {
     },
     "0x464ebe77c293e473b48cfe96ddcf88fcf7bfdac0": {
         id: "kryll"
+    },
+    //Coins. Based on the slip
+    "0x000000000000000000000000000000000000003c": {
+        id: "ethereum"
+    },
+    "0x00000000000000000000000000000000000000ac": {
+        id: "poa-network"
+    },
+    "0x000000000000000000000000000000000000003d": {
+        id: "ethereum-classic"
+    },
+    "0x0000000000000000000000000000000000000334": {
+        id: "callisto-network"
+    },
+    "0x00000000000000000000000000000000000017ac": {
+        id: "gochain"
     }
 }
