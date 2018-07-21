@@ -18,10 +18,10 @@ export class Redirect {
                 const url = `${Nodes[networkId]}tokens`
 
                 await BluebirbPromise.map(addresses, async (address) => {
-                    const tokens = await this.getAddressTokens(url, address)
+                    const tokens = await this.getAddressTokens(url, address.toLowerCase())
                     if (Array.isArray(tokens)) {
                         tokens.forEach(token => {
-                            json.docs.push(Object.assign(token, {coin: coinIndex}, {type: "ERC20"}))
+                            json.docs.push(Object.assign(token.contract, {coin: CoinTypeIndex[networkId]}, {type: "ERC20"}))
                         })
                     }
                 })
