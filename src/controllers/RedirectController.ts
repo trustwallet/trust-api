@@ -1,5 +1,4 @@
-import url = require("url");
-import { Nodes, CoinTypes } from "../controllers/Interfaces/Servers"
+import { Nodes, CoinTypeIndex } from "../controllers/Interfaces/Servers"
 import * as BluebirbPromise from "bluebird";
 import axios from "axios";
 export class Redirect {
@@ -11,24 +10,28 @@ export class Redirect {
 
     public listTokens = async (req, res) => {
         const json = {docs: []}
+        const networks = Object.keys(Nodes)
 
-        for (const coinIndex in req.body) {
-           const addresses: string[] = req.body[coinIndex]
-           const coinName = CoinTypes[parseInt(coinIndex)]
-           const url = `${Nodes[coinName]}tokens`
+        await BluebirbPromise.map(networks, async (networkId) => {
+            for (const coinIndex in req.body) {
+                const addresses: string[] = req.body[coinIndex]
+                const url = `${Nodes[networkId]}tokens`
 
-           await BluebirbPromise.map(addresses, async (address) => {
-                const tokens = await this.getTokens(url, address)
-                tokens.forEach(token => {
-                    json.docs.push(Object.assign(token, {coin: coinIndex}, {type: "ERC20"}))
-                });
-           })
-       }
+                await BluebirbPromise.map(addresses, async (address) => {
+                    const tokens = await this.getAddressTokens(url, address)
+                    if (Array.isArray(tokens)) {
+                        tokens.forEach(token => {
+                            json.docs.push(Object.assign(token, {coin: coinIndex}, {type: "ERC20"}))
+                        })
+                    }
+                })
+            }
+        })
 
        res.json(json)
     }
 
-    public getTokens(url: string, address: string) {
+    public getAddressTokens(url: string, address: string) {
         return axios({
             url,
             params: {
@@ -38,7 +41,8 @@ export class Redirect {
     }
 
     private getRedirectUrl = (req) => {
-        const networkId = req.path.substring(1, this.queryIndex(req.path))
+        console.log(req.params)
+        const networkId: string = req.params.networkId
         return `${Nodes[networkId]}${req.url.slice(this.queryIndex(req.url) + 1)}`
     }
 
