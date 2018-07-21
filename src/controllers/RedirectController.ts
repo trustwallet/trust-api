@@ -23,7 +23,9 @@ export class Redirect {
                         const tokens = await this.getAddressTokens(url, address.toLowerCase())
                         if (Array.isArray(tokens)) {
                             tokens.forEach(token => {
-                                json.docs.push(Object.assign(token.contract, {coin: CoinTypeIndex[networkId]}, {type: "ERC20"}))
+                                token.contract.coin = CoinTypeIndex[networkId]
+                                token.contract.type = "ERC20"
+                                json.docs.push(token)
                             })
                         }
                     })
@@ -44,7 +46,6 @@ export class Redirect {
     }
 
     private getRedirectUrl = (req, network?) => {
-        console.log(req.params)
         const networkId: string = network ? network : req.params.networkId
         return `${Nodes[networkId]}${req.url.slice(this.queryIndex(req.url) + 1)}`
     }
