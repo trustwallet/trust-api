@@ -11,7 +11,7 @@ export enum Nodes {
 export enum CoinTypeIndex {
     ethereum = 60,
     // classic = 61,
-    // poa = 178,
+    poa = 178,
     // callisto = 820,
     // goChain = 6060
 }
