@@ -20,12 +20,10 @@ router.get("/appcheck/android", appCheck.android);
 router.get("/tokeninfo/:networkid/:address?", tokenInfo.getTokenInfo);
    // Redirect routes
 // Ethereum
-router.get(`/ethereum/transactions`, redirect.redirect)
-router.get(`/ethereum/transactions/:transactionId`, redirect.redirect)
-router.get(`/ethereum/tokens/list`, redirect.redirect)
-router.post(`/ethereum/tokens`, redirect.listTokens)
-
-router.get(`/ethereumClassic/transactions`, redirect.redirect)
+router.get(`/:networkId/transactions`, redirect.redirect)
+router.get(`/:networkId/transactions/:transactionId`, redirect.redirect)
+router.get(`/:networkId/tokens/list`, redirect.redirect)
+router.post(`/tokens`, redirect.listTokens)
 
 export {
     router
