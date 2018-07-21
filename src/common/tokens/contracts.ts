@@ -2000,5 +2000,8 @@ export const contracts = {
     },
     "0x4c0fbe1bb46612915e7967d2c3213cd4d87257ad": {
         id: "apis"
+    },
+    "0x8e5610ab5e39d26828167640ea29823fe1dd5843": {
+        id: "kanadecoin"
     }
 }
