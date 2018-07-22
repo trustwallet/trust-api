@@ -11,26 +11,27 @@ export class Redirect {
 
     public listTokens = async (req, res) => {
         const json = {docs: []}
-        const networks = Object.keys(Nodes)
+        const networks = Object.keys(CoinTypeIndex)
+        const bodyNetworks = Object.keys(req.body)
+        const commonNetworks = [networks, bodyNetworks].shift().filter((v) => {
+            return [networks, bodyNetworks].every((a) => a.indexOf(v) !== -1);
+        });
 
-        await BluebirbPromise.map(networks, async (networkId) => {
-            for (const coinIndex in req.body) {
-                if (coinIndex in CoinTypeIndex) {
-                    const addresses: string[] = req.body[coinIndex]
-                    const url = `${Nodes[networkId]}tokens`
+        await BluebirbPromise.map(commonNetworks, async (networkIndex) => {
+            const networkId = CoinTypeIndex[networkIndex]
+            const addresses: string[] = req.body[networkIndex]
+            const url = `${Nodes[networkId]}tokens`
 
-                    await BluebirbPromise.map(addresses, async (address) => {
-                        const tokens = await this.getAddressTokens(url, address.toLowerCase())
-                        if (Array.isArray(tokens)) {
-                            tokens.forEach(token => {
-                                token.contract.coin = CoinTypeIndex[networkId]
-                                token.contract.type = "ERC20"
-                                json.docs.push(token)
-                            })
-                        }
+            await BluebirbPromise.map(addresses, async (address) => {
+                const tokens = await this.getAddressTokens(url, address.toLowerCase())
+                if (Array.isArray(tokens)) {
+                    tokens.forEach(token => {
+                        token.contract.coin = parseInt(networkIndex)
+                        token.contract.type = "ERC20"
+                        json.docs.push(token)
                     })
                 }
-            }
+            })
         })
 
        res.json(json)
