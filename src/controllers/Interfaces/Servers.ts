@@ -6,6 +6,9 @@ export enum Nodes {
     // localhost = "http://localhost:8000/"
 }
 
+export enum Endpoints {
+    TokenList = "tokens/list"
+}
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 
 export enum CoinTypeIndex {

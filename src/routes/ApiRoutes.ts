@@ -18,12 +18,12 @@ router.post("/tokenPrices", priceController.getTokenPrices);
 router.get("/appcheck/android", appCheck.android);
 // Token info
 router.get("/tokeninfo/:networkid/:address?", tokenInfo.getTokenInfo);
-   // Redirect routes
-// Ethereum
+
+// Redirect routes
 router.get(`/:networkId/transactions`, redirect.redirect)
 router.get(`/:networkId/transactions/:transactionId`, redirect.redirect)
-router.get(`/:networkId/tokens/list`, redirect.redirect)
-router.post(`/tokens`, redirect.listTokens)
+router.get(`/tokens/list`, redirect.getTokensList)
+router.post(`/tokens`, redirect.getAddressAllTokens)
 router.get(`/assets`, redirect.getAssets)
 
 export {
