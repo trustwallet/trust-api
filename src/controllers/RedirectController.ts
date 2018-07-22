@@ -47,8 +47,10 @@ export class Redirect {
             const networkTokenList = await this.getAddressTokens({url, params: {query}})
 
             if (Array.isArray(networkTokenList)) {
-                networkTokenList.forEach(element => {
-                    tokens.docs.push(element)
+                networkTokenList.forEach(token => {
+                    token.coin = parseInt(CoinTypeIndex[network])
+                    token.type = "ERC20"
+                    tokens.docs.push(token)
                 });
             }
         })
