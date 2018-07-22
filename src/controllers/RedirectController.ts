@@ -37,6 +37,11 @@ export class Redirect {
        res.json(json)
     }
 
+    public getAssets = async (req, res) => {
+        const url = `${Nodes["ethereum"]}${req.url.slice(1)}`
+        res.redirect(url)
+    }
+
     public getAddressTokens(url: string, address: string) {
         return axios({
             url,

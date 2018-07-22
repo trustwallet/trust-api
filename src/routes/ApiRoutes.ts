@@ -24,6 +24,7 @@ router.get(`/:networkId/transactions`, redirect.redirect)
 router.get(`/:networkId/transactions/:transactionId`, redirect.redirect)
 router.get(`/:networkId/tokens/list`, redirect.redirect)
 router.post(`/tokens`, redirect.listTokens)
+router.get(`/assets`, redirect.getAssets)
 
 export {
     router
