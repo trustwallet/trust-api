@@ -2009,5 +2009,23 @@ export const contracts = {
     },
     "0x076641af1b8f06b7f8c92587156143c109002cbe": {
         id: "sopay"
+    },
+    "0xc8058d59e208399b76e66da1ec669dd6b1bee2ea": {
+        id: "gold-bits-coin"
+    },
+    "0xbd168cbf9d3a375b38dc51a202b5e8a4e52069ed": {
+        id: "blue-whale-token"
+    },
+    "0xd8950fdeaa10304b7a7fd03a2fc66bc39f3c711a": {
+        id: "wys-token"
+    },
+    "0xc4bcd64cb216d49fd3c643a32762f34626b45a1a": {
+        id: "cosmo-coin"
+    },
+    "0x9d9223436ddd466fc247e9dbbd20207e640fef58": {
+        id: "olive"
+    },
+    "0xaae81c0194d6459f320b70ca0cedf88e11a242ce": {
+        id: "wetoken"
     }
 }
