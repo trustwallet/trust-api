@@ -1,7 +1,7 @@
 import { Nodes, CoinTypeIndex, Endpoints } from "../controllers/Interfaces/Servers"
 import * as BluebirbPromise from "bluebird";
 import axios from "axios";
-import { concatSeries } from "../../node_modules/@types/async";
+
 export class Redirect {
 
     public redirect = (req, res) => {
@@ -40,7 +40,8 @@ export class Redirect {
     public getTokensList = async (req, res) => {
         const tokens = {docs: []}
         const query = req.query.query
-        const networks = Object.keys(Nodes)
+        const network = req.query.network
+        const networks = network ? [CoinTypeIndex[network]] : Object.keys(Nodes)
 
         await BluebirbPromise.map(networks, async (network) => {
             const url: string = `${Nodes[network]}${Endpoints.TokenList}`
@@ -59,7 +60,7 @@ export class Redirect {
     }
 
     public getAssets = async (req, res) => {
-        const url = `${Nodes["ethereum"]}${req.url.slice(1)}`
+        const url = `${Nodes.ethereum}${req.url.slice(1)}`
         res.redirect(url)
     }
 
