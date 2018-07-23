@@ -2003,5 +2003,11 @@ export const contracts = {
     },
     "0x8e5610ab5e39d26828167640ea29823fe1dd5843": {
         id: "kanadecoin"
+    },
+    "0xf485c5e679238f9304d986bb2fc28fe3379200e5": {
+        id: "ugchain"
+    },
+    "0x076641af1b8f06b7f8c92587156143c109002cbe": {
+        id: "sopay"
     }
 }
