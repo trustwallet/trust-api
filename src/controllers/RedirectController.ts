@@ -1,6 +1,8 @@
 import { Nodes, CoinTypeIndex, Endpoints } from "../controllers/Interfaces/Servers"
+import { Request, Response } from "express";
 import * as BluebirbPromise from "bluebird";
 import axios from "axios";
+import * as qs from "qs";
 
 export class Redirect {
 
@@ -49,7 +51,7 @@ export class Redirect {
         const commonNetworks = this.getCommonNetworks(queryNetworksId, Object.keys(CoinTypeIndex))
 
         await BluebirbPromise.map(commonNetworks, async (network) => {
-            const url: string = `${Nodes[network]}${Endpoints.TokenList}`
+            const url: string = `${Nodes[network]}${Endpoints.TokensList}`
             const networkTokenList = await this.getAddressTokens({url, params: {query}})
 
             if (Array.isArray(networkTokenList)) {
@@ -68,9 +70,14 @@ export class Redirect {
         return [arr1, arr2].shift().filter(v => [arr1, arr2].every(a => a.indexOf(v) !== -1))
     }
 
-    public getAssets = async (req, res) => {
-        const url = `${Nodes.ethereum}${req.url.slice(1)}`
+    public getAssets = (req: Request, res: Response) => {
+        const query = this.createQuery(req.query)
+        const url = `${Nodes.ethereum}${Endpoints.Assets}${query}`
         res.redirect(url)
+    }
+
+    public createQuery = (query: any): string => {
+        return query ? `?${qs.stringify(query)}` : ``
     }
 
     public getAddressTokens({url, params}) {
