@@ -6,9 +6,37 @@ import * as qs from "qs";
 
 export class Redirect {
 
-    public redirect = (req, res) => {
-        const url = this.getRedirectUrl(req)
-        res.redirect(url)
+    public getTransactionById = async (req: Request, res: Response) => {
+        const networkId = req.params.networkId
+        const transactionId = req.params.transactionId
+        const url = `${Nodes[networkId]}${Endpoints.TransactionId}${transactionId}`
+
+        try {
+            const transaction = await this.getAddressTokens({url})
+            if (typeof transaction === "object") {
+                transaction.coin = CoinTypeIndex[networkId]
+                return res.json(transaction)
+            }
+        } catch (error) {
+            const status = error.response.status
+            return res.status(status).json({error: "error"})
+        }
+
+    }
+
+    public getTransactions = async (req: Request, res: Response) => {
+        const networkId = req.params.networkId
+        const query = this.createQuery(req.query)
+        const url = `${Nodes[networkId]}${Endpoints.Transactions}${query}`
+        const transactions = await this.getAddressTokens({url})
+
+        if (Array.isArray(transactions)) {
+            transactions.forEach(trx => {
+                trx.coin = CoinTypeIndex[networkId]
+            })
+            return res.json(transactions)
+        }
+        res.json([])
     }
 
     public getAddressAllTokens = async (req, res) => {
@@ -80,7 +108,8 @@ export class Redirect {
         return query ? `?${qs.stringify(query)}` : ``
     }
 
-    public getAddressTokens({url, params}) {
+    public getAddressTokens(args) {
+        const {url, params } = args
         return axios({url, params}).then(res => res.data.docs ? res.data.docs : res.data)
     }
 

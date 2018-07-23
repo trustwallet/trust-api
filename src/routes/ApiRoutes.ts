@@ -20,8 +20,8 @@ router.get("/appcheck/android", appCheck.android);
 router.get("/tokeninfo/:networkid/:address?", tokenInfo.getTokenInfo);
 
 // Redirect routes
-router.get(`/:networkId/transactions`, redirect.redirect)
-router.get(`/:networkId/transactions/:transactionId`, redirect.redirect)
+router.get(`/:networkId/transactions`, redirect.getTransactions)
+router.get(`/:networkId/transactions/:transactionId`, redirect.getTransactionById)
 router.get(`/tokens/list`, redirect.getTokensList)
 router.post(`/tokens`, redirect.getAddressAllTokens)
 router.get(`/assets`, redirect.getAssets)
