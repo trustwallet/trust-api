@@ -9,7 +9,8 @@ export enum Nodes {
 export enum Endpoints {
     TokensList = "tokens/list",
     Assets = "assets",
-    Transactions = "transactions"
+    Transactions = "transactions",
+    TransactionId = "transactions/"
 }
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 
