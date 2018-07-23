@@ -13,9 +13,7 @@ export class Redirect {
         const json = {docs: []}
         const networks = Object.keys(CoinTypeIndex)
         const bodyNetworks = Object.keys(req.body)
-        const commonNetworks = [networks, bodyNetworks].shift().filter((v) => {
-            return [networks, bodyNetworks].every((a) => a.indexOf(v) !== -1);
-        });
+        const commonNetworks = this.getCommonNetworks(networks, bodyNetworks)
 
         await BluebirbPromise.map(commonNetworks, async (networkIndex) => {
             const networkId = CoinTypeIndex[networkIndex]
@@ -39,11 +37,18 @@ export class Redirect {
 
     public getTokensList = async (req, res) => {
         const tokens = {docs: []}
-        const query = req.query.query
-        const network = req.query.network
-        const networks = network ? [CoinTypeIndex[network]] : Object.keys(Nodes)
+        const query: string = req.query.query
+        const networks = req.query.networks
+        const queryNetworks: string[] = networks ? networks.split(",") : networks
 
-        await BluebirbPromise.map(networks, async (network) => {
+        if (!query || !queryNetworks) {
+            return res.json(tokens)
+        }
+
+        const queryNetworksId = queryNetworks.map(net => CoinTypeIndex[net])
+        const commonNetworks = this.getCommonNetworks(queryNetworksId, Object.keys(CoinTypeIndex))
+
+        await BluebirbPromise.map(commonNetworks, async (network) => {
             const url: string = `${Nodes[network]}${Endpoints.TokenList}`
             const networkTokenList = await this.getAddressTokens({url, params: {query}})
 
@@ -57,6 +62,10 @@ export class Redirect {
         })
 
         res.json(tokens)
+    }
+
+    public getCommonNetworks = (arr1: string[], arr2: string[]): string[] => {
+        return [arr1, arr2].shift().filter(v => [arr1, arr2].every(a => a.indexOf(v) !== -1))
     }
 
     public getAssets = async (req, res) => {
