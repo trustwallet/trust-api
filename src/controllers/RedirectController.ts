@@ -7,6 +7,7 @@ import * as qs from "qs";
 export class Redirect {
 
     public getTransactionById = async (req: Request, res: Response) => {
+        const json = {docs: []}
         const networkId = req.params.networkId
         const transactionId = req.params.transactionId
         const url = `${Nodes[networkId]}${Endpoints.TransactionId}${transactionId}`
@@ -15,8 +16,10 @@ export class Redirect {
             const transaction = await this.getAddressTokens({url})
             if (typeof transaction === "object") {
                 transaction.coin = CoinTypeIndex[networkId]
-                return res.json(transaction)
+                json.docs.push(transaction)
+                return res.json(json)
             }
+            res.json(json)
         } catch (error) {
             const status = error.response.status
             return res.status(status).json({error: "error"})
@@ -25,18 +28,21 @@ export class Redirect {
     }
 
     public getTransactions = async (req: Request, res: Response) => {
+        const json = {docs: []}
         const networkId = req.params.networkId
         const query = this.createQuery(req.query)
         const url = `${Nodes[networkId]}${Endpoints.Transactions}${query}`
+        console.log({url})
         const transactions = await this.getAddressTokens({url})
 
         if (Array.isArray(transactions)) {
-            transactions.forEach(trx => {
-                trx.coin = CoinTypeIndex[networkId]
+            transactions.forEach(transaction => {
+                transaction.coin = CoinTypeIndex[networkId]
+                json.docs.push(transaction)
             })
-            return res.json(transactions)
+            return res.json(json)
         }
-        res.json([])
+        res.json(json)
     }
 
     public getAddressAllTokens = async (req, res) => {
