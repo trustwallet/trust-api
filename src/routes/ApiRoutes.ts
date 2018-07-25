@@ -25,6 +25,8 @@ router.get(`/:networkId/transactions/:transactionId`, redirect.getTransactionByI
 router.get(`/tokens/list`, redirect.getTokensList)
 router.post(`/tokens`, redirect.getAddressAllTokens)
 router.get(`/assets`, redirect.getAssets)
+router.post(`/notifications/register`, redirect.register)
+router.post(`/notifications/unregister`, redirect.unregister)
 
 export {
     router
