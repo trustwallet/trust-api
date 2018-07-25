@@ -6,27 +6,6 @@ import * as qs from "qs";
 
 export class Redirect {
 
-    public getTransactionById = async (req: Request, res: Response) => {
-        const json = {docs: []}
-        const networkId = req.params.networkId
-        const transactionId = req.params.transactionId
-        const url = `${Nodes[networkId]}${Endpoints.TransactionId}${transactionId}`
-
-        try {
-            const transaction = await this.getAddressTokens({url})
-            if (typeof transaction === "object") {
-                transaction.coin = CoinTypeIndex[networkId]
-                json.docs.push(transaction)
-                return res.json(json)
-            }
-            res.json(json)
-        } catch (error) {
-            const status = error.response.status
-            return res.status(status).json({error: "error"})
-        }
-
-    }
-
     public getTransactions = async (req: Request, res: Response) => {
         const json = {docs: []}
         const networkId = req.params.networkId
