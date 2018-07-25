@@ -22,9 +22,11 @@ export class TokenPriceController {
         const tokens = req.body.tokens;
 
         this.getRemotePrices(currency).then((prices: any) => {
+            const docs = this.filterTokenPrices(prices, tokens, currency)
             sendJSONresponse(res, 200, {
                 status: true,
-                response: this.filterTokenPrices(prices, tokens, currency),
+                response: docs,
+                docs
             })
         }).catch((error: Error) => {
             sendJSONresponse(res, 500, {
