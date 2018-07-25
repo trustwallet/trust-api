@@ -8,14 +8,15 @@ export enum Nodes {
 
 export enum Endpoints {
     TokensList = "tokens/list",
+    Tokens = "tokens",
     Assets = "assets",
     Transactions = "transactions",
     TransactionId = "transactions/",
     RegisterDevice = "push/register",
     UnegisterDevice = "push/unregister"
 }
-// https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 
+// https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 export enum CoinTypeIndex {
     ethereum = 60,
     classic = 61,
