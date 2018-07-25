@@ -32,7 +32,6 @@ export class Redirect {
         const networkId = req.params.networkId
         const query = this.createQuery(req.query)
         const url = `${Nodes[networkId]}${Endpoints.Transactions}${query}`
-        console.log({url})
         const transactions = await this.getAddressTokens({url})
 
         if (Array.isArray(transactions)) {
@@ -54,7 +53,7 @@ export class Redirect {
         await BluebirbPromise.map(commonNetworks, async (networkIndex) => {
             const networkId = CoinTypeIndex[networkIndex]
             const addresses: string[] = req.body[networkIndex]
-            const url = `${Nodes[networkId]}tokens`
+            const url = `${Nodes[networkId]}${Endpoints.Tokens}`
 
             await BluebirbPromise.map(addresses, async (address) => {
                 const tokens: any = await this.getAddressTokens({url, params: {address: address.toLowerCase()}})
@@ -100,6 +99,53 @@ export class Redirect {
         res.json(tokens)
     }
 
+    public register = async (req: Request, res: Response) => {
+        const registrResults = []
+        const {deviceID, token, type} = req.body
+        const networks = Object.keys(req.body.networks)
+        const commonNetworks = this.getCommonNetworks(networks, Object.keys(CoinTypeIndex))
+
+        try {
+           await BluebirbPromise.map(commonNetworks, async (network) => {
+                const url = `${Nodes[CoinTypeIndex[network]]}${Endpoints.RegisterDevice}`
+                const wallets = req.body.networks[network]
+                const data = { deviceID, token, type, wallets }
+                const registered = await axios.post(url, data).then(res => res.data)
+                registrResults.push(registered)
+           })
+
+           this.sendJSONresponse(res, 200, registrResults)
+        } catch (error) {
+            this.sendJSONresponse(res, 400, error)
+        }
+
+    }
+
+    public unregister = async (req: Request, res: Response) => {
+        const unregisterResults = []
+        const {deviceID, token, networks, type} = req.body
+        const networksid = req.body.networks.map(network => String(network))
+        const commonNetworks = this.getCommonNetworks(networksid, Object.keys(CoinTypeIndex))
+
+        try {
+            await BluebirbPromise.map(commonNetworks, async (networkIndex) => {
+                const coin = CoinTypeIndex[networkIndex]
+                const url = `${Nodes[coin]}${Endpoints.UnegisterDevice}`
+                const data = {deviceID, token, networks, type}
+                const unregistered = await axios.post(url, data).then(res => res.data)
+                unregisterResults.push(unregistered)
+            })
+
+            this.sendJSONresponse(res, 200, unregisterResults)
+        } catch (error) {
+            this.sendJSONresponse(res, 500, {error: error.toString()})
+        }
+    }
+
+    private sendJSONresponse(res: Response, status: number, content: any) {
+        return res.status(status).json(content)
+    }
+
     public getCommonNetworks = (arr1: string[], arr2: string[]): string[] => {
         return [arr1, arr2].shift().filter(v => [arr1, arr2].every(a => a.indexOf(v) !== -1))
     }
@@ -119,10 +165,4 @@ export class Redirect {
         return axios({url, params}).then(res => res.data.docs ? res.data.docs : res.data)
     }
 
-    private getRedirectUrl = (req, network?) => {
-        const networkId: string = network ? network : req.params.networkId
-        return `${Nodes[networkId]}${req.url.slice(this.queryIndex(req.url) + 1)}`
-    }
-
-    private queryIndex = (string) => string.indexOf("/", string.indexOf("/") + 1)
 }
