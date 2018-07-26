@@ -2027,5 +2027,44 @@ export const contracts = {
     },
     "0xaae81c0194d6459f320b70ca0cedf88e11a242ce": {
         id: "wetoken"
+    },
+    "0xe3278df3eb2085ba9b6899812a99a10f9ca5e0df": {
+        id: "tourist-token"
+    },
+    "0x4a42d2c580f83dce404acad18dab26db11a1750e": {
+       id: "relex"
+    },
+    "0xfbc3c8aad80b5934d134e2cce065702ff254ad7d": {
+       id: "chex"
+    },
+    "0xf03f8d65bafa598611c3495124093c56e8f638f0": {
+       id: "view"
+    },
+    "0x9746953f5b1324a78132895cfd263f417b0faae3": {
+       id: "valuecybertoken"
+    },
+    "0xd2946be786f35c3cc402c29b323647abda799071": {
+       id: "vikkytoken"
+    },
+    "0xfbe878ced08132bd8396988671b450793c44bc12": {
+       id: "fox-trading"
+    },
+    "0xec491c1088eae992b7a214efb0a266ad0927a72a": {
+       id: "ab-chain-rtb"
+    },
+    "0x81705082ef9f0d660f07be80093d46d826d48b25": {
+       id: "globalvillage-ecosystem"
+    },
+    "0xaa19961b6b858d9f18a115f25aa1d98abc1fdba8": {
+       id: "local-coin-swap"
+    },
+    "0xb5b8f5616fe42d5ceca3e87f3fddbdd8f496d760": {
+       id: "zper-token"
+    },
+    "0xe7d7b37e72510309db27c460378f957b1b04bd5d": {
+       id: "empowr-coin"
+    },
+    "0x47da42696a866cdc61a4c809a515500a242909c1": {
+       id: "bitrewards"
     }
 }
