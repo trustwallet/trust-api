@@ -95,7 +95,8 @@ export class Redirect {
 
            this.sendJSONresponse(res, 200, registrResults)
         } catch (error) {
-            this.sendJSONresponse(res, 400, error)
+            console.error(`Error registering device`, error)
+            this.sendJSONresponse(res, 400, {error: "Error regestering device"})
         }
 
     }
@@ -117,6 +118,7 @@ export class Redirect {
 
             this.sendJSONresponse(res, 200, unregisterResults)
         } catch (error) {
+            console.error(`Error registering device`, error)
             this.sendJSONresponse(res, 500, {error: error.toString()})
         }
     }
