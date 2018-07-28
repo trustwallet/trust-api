@@ -2066,5 +2066,29 @@ export const contracts = {
     },
     "0x47da42696a866cdc61a4c809a515500a242909c1": {
        id: "bitrewards"
+    },
+    "0xbf5496122cf1bb778e0cbe5eab936f2be5fc0940": {
+        id: "fundtoken"
+    },
+    "0xe0c8087ce1a17bdd5d6c12eb52f8d7eff7791987": {
+        id: "linfinity"
+    },
+    "0x4bbbc57af270138ef2ff2c50dbfad684e9e0e604": {
+        id: "wabnetwork"
+    },
+    "0xd8698a985b89650d0a70f99ad2909bd0c0b4b51c": {
+        id: "consentium"
+    },
+    "0xa849eaae994fb86afa73382e9bd88c2b6b18dc71": {
+        id: "mass-vehicle-ledger"
+    },
+    "0xafbec4d65bc7b116d85107fd05d912491029bf46": {
+        id: "arbitrage"
+    },
+    "0xf8c595d070d104377f58715ce2e6c93e49a87f3c": {
+        id: "dacc"
+    },
+    "0xfb5a551374b656c6e39787b1d3a03feab7f3a98e": {
+        id: "thingsoperatingsystem"
     }
 }
