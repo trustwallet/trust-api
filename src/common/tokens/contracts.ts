@@ -2090,5 +2090,8 @@ export const contracts = {
     },
     "0xfb5a551374b656c6e39787b1d3a03feab7f3a98e": {
         id: "thingsoperatingsystem"
+    },
+    "0x8f66a173696502a0ad280781c3e55928a06c1312": {
+        id: "wavebase"
     }
 }
