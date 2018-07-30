@@ -243,9 +243,18 @@ router.get(`/assets`, redirect.getAssets)
  * @apiParam (Request body) {String="ios","android"} type Device type
  *
  *
- * @apiParamexample {json} Request Body Example
+ * @apiParamexample {json} Request Body Example for regestering iOS device
  * {
  *      "deviceID": "B14BD907-324A-4A40-98A1-A255C26D2BE52",
+ *      "token": "4a47fc7f78f55e2d9932abd7bb7259364356affeaa3aa28efc73f9955e9233e2",
+ *      "networks": {
+ * 	        "60": ["0x33923a7888c0b885768b3ed578f4d443b17182ee"]
+ *      },
+ *      "type": "ios"
+ * }
+ *
+ * @apiParamexample {json} Request Body Example for regestering Android device
+ * {
  *      "token": "4a47fc7f78f55e2d9932abd7bb7259364356affeaa3aa28efc73f9955e9233e2",
  *      "networks": {
  * 	        "60": ["0x33923a7888c0b885768b3ed578f4d443b17182ee"]
@@ -275,9 +284,14 @@ router.post(`/notifications/register`, redirect.register)
  * @apiParam (Request body) {Number[]} networks Array of network indexes (https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
  * If specified empty array, unsubscribe will happen on all supported networks
  *
- * @apiParamexample {json} Request Body Example
+ * @apiParamexample {json} Request Body Example for unsubscribe iOS device
  * {
  *      "deviceID": "B14BD907-324A-4A40-98A1-A255C26D2BE52",
+ *      "networks": [60, 61]
+ * }
+ *
+ * @apiParamexample {json} Request Body Example for unsubscribe Android device
+ * {
  *      "token": "4a47fc7f78f55e2d9932abd7bb7259364356affeaa3aa28efc73f9955e9233e2",
  *      "networks": [60, 61]
  *      "type": "android"
