@@ -104,11 +104,11 @@ export class Redirect {
     public unregister = async (req: Request, res: Response) => {
         const unregisterResults = []
         const {deviceID, token, networks, type} = req.body
-        const networksid = req.body.networks.map(network => String(network))
-        const commonNetworks = this.getCommonNetworks(networksid, Object.keys(CoinTypeIndex))
+        const net = (Array.isArray(networks) && networks.length == 0) ? this.getSupportedCoinIndex() : networks
+        const networksToUnregister = this.getCommonNetworks(net, this.getSupportedCoinIndex())
 
         try {
-            await BluebirbPromise.map(commonNetworks, async (networkIndex) => {
+            await BluebirbPromise.map(networksToUnregister, async (networkIndex) => {
                 const coin = CoinTypeIndex[networkIndex]
                 const url = `${Nodes[coin]}${Endpoints.UnegisterDevice}`
                 const data = {deviceID, token, networks, type}
@@ -121,6 +121,12 @@ export class Redirect {
             console.error(`Error registering device`, error)
             this.sendJSONresponse(res, 500, {error: error.toString()})
         }
+    }
+
+    private getSupportedCoinIndex () {
+        const keys = Object.keys(CoinTypeIndex).filter(k => typeof CoinTypeIndex[k as any] === "number")
+        const values = keys.map(k => CoinTypeIndex[k as any])
+        return values;
     }
 
     private sendJSONresponse(res: Response, status: number, content: any) {
