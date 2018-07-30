@@ -104,8 +104,7 @@ export class Redirect {
     public unregister = async (req: Request, res: Response) => {
         const unregisterResults = []
         const {deviceID, token, networks, type} = req.body
-        const net = (Array.isArray(networks) && networks.length == 0) ? this.getSupportedCoinIndex() : networks
-        const networksToUnregister = this.getCommonNetworks(net, this.getSupportedCoinIndex())
+        const networksToUnregister = this.getSupportedCoinIndex()
 
         try {
             await BluebirbPromise.map(networksToUnregister, async (networkIndex) => {
