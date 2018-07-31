@@ -24,8 +24,8 @@ export class AppCheck {
     }
 
     public ios(req: Request, res: Response) {
-        const version = "1.91.0"
-        const build = 278
+        const version = "1.66.0"
+        const build = 252
         sendJSONresponse(res, 200, {
             "latestVersion": version,
             "latestVersionCode": build,
