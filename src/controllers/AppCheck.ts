@@ -10,15 +10,11 @@ export class AppCheck {
             "latestVersionCode": build,
             "url": "https://files.trustwalletapp.com/builds/latest_release.apk",
             "releaseNotes": [
+                    "- Introducing Multi-Coin Wallet to store (ETH, ETC, POA) and all ERC20 tokens",
                     "- Wallet naming",
                     "- Export mnemonic phrase",
                     "- Push notifications",
                     "- Improved token UI - clicking on token shows transactions for that token",
-                    "- Amount validation",
-                    "- Descriptions on import fields",
-                    "- Show identicon in wallet list",
-                    "- Fixes: collectible still being show after transfer",
-                    "- Introducing Multi-Coin Wallet to store (ETH, ETC, POA) and all ERC20 tokens"
             ],
             "title": "Update Available",
             "description": "A new version of Trust Wallet is available. Please update to version " + version,
