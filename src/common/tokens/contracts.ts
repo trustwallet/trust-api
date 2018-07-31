@@ -2093,5 +2093,23 @@ export const contracts = {
     },
     "0x8f66a173696502a0ad280781c3e55928a06c1312": {
         id: "wavebase"
+    },
+    "0xfb1e5f5e984c28ad7e228cdaa1f8a0919bb6a09b": {
+        id: "galaxy-esolutions"
+    },
+    "0xeb021dd3e42dc6fdb6cde54d0c4a09f82a6bca29": {
+        id: "fnkos"
+    },
+    "0x1a66e09f7dccc10eae46e27cfa6b8d44a50df1e7": {
+        id: "prasm"
+    },
+    "0x1410434b0346f5be678d0fb554e5c7ab620f8f4a": {
+        id: "bitkan"
+    },
+    "0xdb25f211ab05b1c97d595516f45794528a807ad8": {
+        id: "stasis-eurs"
+    },
+    "0x0bc61dded5f6710c637cf8288eb6058766ce1921": {
+        id: "coinsuper-ecosystem-network"
     }
 }
