@@ -3,6 +3,7 @@ export enum Nodes {
     classic = "https://trust-classic.herokuapp.com/",
     poa = "https://trust-poa.herokuapp.com/",
     callisto = "https://trust-callisto.herokuapp.com/",
+    gochain = "https://trust-gochain.herokuapp.com/",
     localhost = "http://localhost:8000/"
 }
 
@@ -22,6 +23,6 @@ export enum CoinTypeIndex {
     classic = 61,
     poa = 178,
     callisto = 820,
-    // gochain = 6060,
+    gochain = 6060,
     // localhost = 8000 // Uncomment for test pourpouse
 }
