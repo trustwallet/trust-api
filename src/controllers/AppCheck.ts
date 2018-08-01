@@ -3,14 +3,15 @@ import { sendJSONresponse } from "../common/Utils";
 
 export class AppCheck {
     public android(req: Request, res: Response) {
-        const version = "1.6.105"
-        const build = 278
+        const version = "1.6.108"
+        const build = 281
         sendJSONresponse(res, 200, {
             "latestVersion": version,
             "latestVersionCode": build,
             "url": "https://files.trustwalletapp.com/builds/latest_release.apk",
             "releaseNotes": [
                     "- Introducing Multi-Coin Wallet to store (ETH, ETC, POA) and all ERC20 tokens",
+                    "- Accelerated the load of prices for coins and tokens.",
                     "- Wallet naming",
                     "- Export mnemonic phrase",
                     "- Push notifications",
