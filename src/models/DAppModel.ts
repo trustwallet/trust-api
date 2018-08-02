@@ -17,8 +17,8 @@ const scheme = new Schema({
     },
     url: {
         type: String,
-        index: { 
-            unique: true 
+        index: {
+            unique: true
         }
     },
     image: {
