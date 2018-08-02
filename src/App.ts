@@ -16,7 +16,7 @@ const port = process.env.PORT || 8003;
 
 export class App {
 
-    public app: any;
+    public app: express.Application;
     public db: Database;
 
 
