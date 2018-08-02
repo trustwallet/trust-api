@@ -2111,5 +2111,50 @@ export const contracts = {
     },
     "0x0bc61dded5f6710c637cf8288eb6058766ce1921": {
         id: "coinsuper-ecosystem-network"
+    },
+    "0xc98e0639c6d2ec037a615341c369666b110e80e5": {
+        id: "ethereum-monero"
+    },
+    "0xebc7cd2684dd96619841c7994343c5a8bda94b10": {
+        id: "kwhcoin"
+    },
+    "0x8d5682941ce456900b12d47ac06a88b47c764ce1": {
+        id: "rightmesh"
+    },
+    "0x4a6058666cf1057eac3cd3a5a614620547559fc9": {
+        id: "brickblock"
+    },
+    "0x5d48f293baed247a2d0189058ba37aa238bd4725": {
+        id: "neurochain"
+    },
+    "0x554ffc77f4251a9fb3c0e3590a6a205f8d4e067d": {
+        id: "zmine"
+    },
+    "0x2cc114bbe7b551d62b15c465c7bdcccd9125b182": {
+        id: "idol-coin"
+    },
+    "0x34364bee11607b1963d66bca665fde93fca666a8": {
+        id: "you-coin"
+    },
+    "0x4212fea9fec90236ecc51e41e2096b16ceb84555": {
+        id: "six-domain-chain"
+    },
+    "0xfb8bf095ebcdad57d2e37573a505e7d3bafdd3cc": {
+        id: "dipnet"
+    },
+    "0xfc44ec51c80e35a87bc2140299b1636ec83dfb04": {
+        id: "volt"
+    },
+    "0xff2b3353c3015e9f1fbf95b9bda23f58aa7ce007": {
+        id: "bitscreener-token"
+    },
+    "0x5e8f855966d638135a968861e80dda722291b06d": {
+        id: "coinvest"
+    },
+    "0x0e69d0a2bbb30abcb7e5cfea0e4fde19c00a8d47": {
+        id: "carlive-chain"
+    },
+    "0x0223fc70574214f65813fe336d870ac47e147fae": {
+        id: "cononchain"
     }
 }
