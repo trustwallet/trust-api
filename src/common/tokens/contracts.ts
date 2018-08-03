@@ -2156,5 +2156,8 @@ export const contracts = {
     },
     "0x0223fc70574214f65813fe336d870ac47e147fae": {
         id: "cononchain"
+    },
+    "0xe1aee98495365fc179699c1bb3e761fa716bee62": {
+        id: "bezant"
     }
 }
