@@ -1,4 +1,4 @@
-import { Nodes, CoinTypeIndex, Endpoints } from "../controllers/Interfaces/Servers"
+import { Nodes, CoinTypeIndex, Endpoints } from "./Interfaces/Servers"
 import { Request, Response } from "express";
 import * as BluebirbPromise from "bluebird";
 import axios from "axios";
