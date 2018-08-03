@@ -324,7 +324,7 @@ router.post(`/notifications/register`, redirect.register)
 router.post(`/notifications/unregister`, redirect.unregister)
 
 /**
- * @api {get} /tickers/:currency
+ * @api {get} /tickers
  *
  * @apiVersion 0.1.0
  * @apiName GetTickers
@@ -334,7 +334,7 @@ router.post(`/notifications/unregister`, redirect.unregister)
  * @apiParam {String="AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR", "USD"} currency=USD Coin value in curreny. Supported currency
  *
  * @apiExample {curl} Example usage
- * https://public.trustwalletapp.com/tickers/USD
+ * https://public.trustwalletapp.com/tickers?currency=USD
  *
  * @apiSuccessExample {json} Sucess-Response:
  *  HTTPS  200 OK
@@ -363,7 +363,7 @@ router.post(`/notifications/unregister`, redirect.unregister)
  *
  */
 
- router.get(`/tickers/:currency`, tickers.getTickers)
+ router.get(`/tickers`, tickers.getTickers)
 
 
 export {
