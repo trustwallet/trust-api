@@ -14,3 +14,7 @@ export interface TickerI {
     total_supply: number;
     volume_24h: number;
 }
+
+export enum Currencies {
+    USD = "USD",
+}
