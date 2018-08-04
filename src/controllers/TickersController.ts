@@ -2,7 +2,6 @@ import { Request, Response } from "express"
 import { sendJSONresponse } from "../common/Utils"
 import { CurrencyCoefficient } from "../models/Currency/CurrencyCoefficientModel";
 import { Ticker } from "../models/Currency/TickerModel";
-import { contracts } from "../common/tokens/contracts"
 import * as winston from "winston"
 // Interfaces
 import { TickerI } from "./Interfaces/Ticker"
