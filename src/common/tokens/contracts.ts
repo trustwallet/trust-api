@@ -2159,5 +2159,8 @@ export const contracts = {
     },
     "0xe1aee98495365fc179699c1bb3e761fa716bee62": {
         id: "bezant"
+    },
+    "0xdb8646f5b487b5dd979fac618350e85018f557d4": {
+        id: "bitcoin-token"
     }
 }
