@@ -50,7 +50,7 @@ router.get("/dapps/category/:id", dAppsController.byCategoryID);
  *      HTTPS  200 OK
  * {
  *  "status": true,
- *   "response": [
+ *  "response": [
  *      {
  *          "id": "aston",
  *          "name": "Aston",
