@@ -2162,5 +2162,53 @@ export const contracts = {
     },
     "0xdb8646f5b487b5dd979fac618350e85018f557d4": {
         id: "bitcoin-token"
+    },
+    "0xee74110fb5a1007b06282e0de5d73a61bf41d9cd": {
+        id: "bhpcash"
+    },
+    "0x540e5fff293f523acd26291b5bc7ac5713991feb": {
+        id: "pitiscoin"
+    },
+    "0xc7c03b8a3fc5719066e185ea616e87b88eba44a3": {
+        id: "eligma-token"
+    },
+    "0x31f3d9d1bece0c033ff78fa6da60a6048f3e13c5": {
+        id: "ebcoin"
+    },
+    "0x18f5b4908e8861e3114ba9a0a9a4e84c5f180cc0": {
+        id: "esports-token"
+    },
+    "0x4618519de4c304f3444ffa7f812dddc2971cc688": {
+        id: "kind-ads-token"
+    },
+    "0xa984a92731c088f1ea4d53b71a2565a399f7d8d5": {
+        id: "intermational-crypto-x"
+    },
+    "0x840fe75abfadc0f2d54037829571b2782e919ce4": {
+        id: "webcoin"
+    },
+    "0xb4d0fdfc8497aef97d3c2892ae682ee06064a2bc": {
+        id: "formosa"
+    },
+    "0xda80b20038bdf968c7307bb5907a469482cf6251": {
+        id: "brokernekonetwork"
+    },
+    "0xa31108e5bab5494560db34c95492658af239357c": {
+        id: "dacsee"
+    },
+    "0x37e1160184f7dd29f00b78c050bf13224780b0b0": {
+        id: "yuan-chain-coin"
+    },
+    "0x1014613e2b3cbc4d575054d4982e580d9b99d7b1": {
+        id: "bitcapitalvendor"
+    },
+    "0x9c794f933b4dd8b49031a79b0f924d68bef43992": {
+        id: "xtrd"
+    },
+    "0x05984006707585f66465e8a6505341f46b64fa7a": {
+        id: "nam-coin"
+    },
+    "0xbc46d9961a3932f7d6b64abfdec80c1816c4b835": {
+        id: "litex"
     }
 }
