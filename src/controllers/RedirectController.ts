@@ -51,8 +51,7 @@ export class Redirect {
 
     public getTokensList = async (req, res) => {
         const tokens = {docs: []}
-        const query: string = req.query.query
-        const networks = req.query.networks
+        const { query, networks, verified = true } = req.query
         const queryNetworks: string[] = networks ? networks.split(",") : networks
 
         if (!query || !queryNetworks) {
@@ -64,7 +63,7 @@ export class Redirect {
 
         await BluebirbPromise.map(commonNetworks, async (network) => {
             const url: string = `${Nodes[network]}${Endpoints.TokensList}`
-            const networkTokenList = await this.getAddressTokens({url, params: {query}})
+            const networkTokenList = await this.getAddressTokens({url, params: {query, verified}})
 
             if (Array.isArray(networkTokenList)) {
                 networkTokenList.forEach(token => {
