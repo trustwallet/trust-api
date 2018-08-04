@@ -111,6 +111,7 @@ router.get(`/:networkId/transactions`, redirect.getTransactions)
  *
  * @apiParam {String} query Query to match condition
  * @apiParam {String} networks Comma delimited list of coin index (https://github.com/satoshilabs/slips/blob/master/slip-0044.md): networks=60,61
+ * @apiParam {Boolean=true,false} [verified=true] Return only verified (meaning listed on https://coinmarketcap.com/) ERC20 contracts. If specified `false` will return both verified and not verified contracts.
  *
  * @apiExample {curl} Example usage
  *  curl -i https://public.trustwalletapp.com/tokens/list?query=TRX&networks=60
