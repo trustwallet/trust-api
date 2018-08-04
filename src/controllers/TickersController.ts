@@ -13,10 +13,10 @@ import { } from "./Interfaces/ITokenPriceController"
 export class Tickers {
     private tickers: TickerI[] = []
     private coefficients: {[key: string]: number} = {}
-
+    private defaltLimit = 50
     public getTickers = async (req: Request, res: Response) => {
         try {
-            const { currency } = req.params
+            const { currency, limit = this.defaltLimit, ids  } = req.params
             let coefficient = 1
 
             if (this.tickers.length == 0) {
