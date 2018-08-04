@@ -3,8 +3,8 @@ import { sendJSONresponse } from "../common/Utils";
 
 export class AppCheck {
     public android(req: Request, res: Response) {
-        const version = "1.6.109"
-        const build = 282
+        const version = "1.6.112"
+        const build = 285
         sendJSONresponse(res, 200, {
             "latestVersion": version,
             "latestVersionCode": build,
