@@ -5,6 +5,7 @@ import { TokenPriceController } from "../controllers/TokenPriceController";
 import { AppCheck } from "../controllers/AppCheck";
 import { TokenInfo } from "../controllers/TokenInfo";
 import { Redirect } from "../controllers/RedirectController";
+import { Tickers } from "../controllers/TickersController";
 const router = express.Router();
 
 const dAppsController = new DAppsController();
@@ -12,6 +13,7 @@ const priceController = new TokenPriceController();
 const appCheck = new AppCheck();
 const tokenInfo = new TokenInfo();
 const redirect = new Redirect()
+const tickers = new Tickers()
 
 // Serve docmentation
 router.use("/docs", express.static(path.join(__dirname, "/../../apidoc")))
@@ -320,6 +322,49 @@ router.post(`/notifications/register`, redirect.register)
  *
  */
 router.post(`/notifications/unregister`, redirect.unregister)
+
+/**
+ * @api {get} /tickers
+ *
+ * @apiVersion 0.1.0
+ * @apiName GetTickers
+ * @apiGroup Market
+ * @apiPermission none
+ *
+ * @apiParam {String="AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR", "USD"} currency=USD Coin value in curreny. Supported currency
+ *
+ * @apiExample {curl} Example usage
+ * https://public.trustwalletapp.com/tickers?currency=USD
+ *
+ * @apiSuccessExample {json} Sucess-Response:
+ *  HTTPS  200 OK
+ *  {
+ *      "status": true,
+ *      "currency": "EUR",
+ *      "docs": [
+ *          {
+ *           "website_slug": "bitcoin",
+ *           "last_updated": 1533239327,
+ *           "percent_change_7d": -6.85,
+ *           "percent_change_24h": -0.07,
+ *           "percent_change_1h": 0.38,
+ *           "market_cap": 7109455615213.157,
+ *           "volume_24h": 247847316304.44513,
+ *           "price": 413674.14790895366,
+ *           "total_supply": 939532504.2292902,
+ *           "circulating_supply": 939532504.2292902,
+ *           "rank": 1,
+ *           "symbol": "BTC",
+ *          "name": "Bitcoin",
+ *           "id": 1
+ *          }
+ *      ]
+ *  }
+ *
+ */
+
+ router.get(`/tickers`, tickers.getTickers)
+
 
 export {
     router
