@@ -30,7 +30,7 @@ router.get("/dapps/category/:id", dAppsController.byCategoryID);
  * @apiExample {curl} Example usage
  * curl -X POST -S -H 'Content-Type: application/json' -d '{"currency":"USD","tokens":[{"contract":"0x1d462414fe14cf489c7a21cac78509f4bf8cd7c0","symbol":"CAN"}]}' -s 'https://public.trustwalletapp.com/tokenPrices'
  *
- * @apiParam {String} currency="USD" For valid fiat currency values refer to https://coinmarketcap.com/api/
+ * @apiParam {String} currency="USD" For valid fiat currency values refer to https://coinmarketcap.com/api/. Price updates every 5 minutes.
  * @apiParam {Object[]} tokens Token object
  * @apiParam {String} tokens.contract Smart contract address
  * @apiParam {String} tokens.symbol Smart contract symbol
@@ -40,13 +40,28 @@ router.get("/dapps/category/:id", dAppsController.byCategoryID);
  *      "currency": "USD",
  *      "tokens": [
  *          {
- *              "contract": "0x1d462414fe14cf489c7a21cac78509f4bf8cd7c0",
- *              "symbol": "CAN"
+ *              "contract": "0x1a0f2ab46ec630f9fd638029027b552afa64b94c",
+ *              "symbol": "PIE"
  *          }
  *      ]
  * }
  *
- *
+ * @apiSuccessExample {json} Sucess-Response:
+ *      HTTPS  200 OK
+ * {
+ *  "status": true,
+ *  "response": [
+ *      {
+ *          "id": "aston",
+ *          "name": "Aston",
+ *          "symbol": "PIE",
+ *          "price": "0.0312211978",
+ *          "percent_change_24h": "-9.74",
+ *          "contract": "0x1a0f2ab46ec630f9fd638029027b552afa64b94c",
+ *          "image": "https://raw.githubusercontent.com/TrustWallet/tokens/master/images/0x1a0f2ab46ec630f9fd638029027b552afa64b94c.png"
+ *       }
+ *  ]
+ * }
  */
 router.post("/tokenPrices", priceController.getTokenPrices);
 router.get("/appcheck/android", appCheck.android);
