@@ -18,3 +18,10 @@ export interface TickerI {
 export enum Currencies {
     USD = "USD",
 }
+
+export enum TickersSortCriteria {
+    PriceAsc = "price_asc",
+    PriceDesc = "price_desc",
+    MarketCapAsc = "market_cap_asc",
+    MarketCapDesc = "market_cap_desc"
+}
