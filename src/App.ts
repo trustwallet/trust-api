@@ -8,7 +8,6 @@ import { router } from "./routes/ApiRoutes";
 import expressValidator = require("express-validator");
 import * as fs from "fs";
 import * as winston from "winston";
-import { Config } from "./common/Config";
 
 const config = require("config");
 const cors = require("cors");
