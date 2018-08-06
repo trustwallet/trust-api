@@ -335,6 +335,7 @@ router.post(`/notifications/unregister`, redirect.unregister)
  * @apiParam {String} [ids] ids Comma separated list of coin id's exp: ids=1,3,5. If ids present page_number or/and page_size will not take affect
  * @apiParam {Number} [page_number=1] Return resutls starting from specified rank
  * @apiParam {Number} [page_size=50] Return a maximum results
+ * @apiParam {String} [sort=rank_asc] TODO other sort criterias: price_asc, price_desc, market_cap_asc, market_cap_desc, rank_asc, volume_24h_asc, volume_24h_desc
  *
  * @apiExample {curl} Example usage
  * https://public.trustwalletapp.com/tickers?currency=EUR&page_number=1&page_size=3
