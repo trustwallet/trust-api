@@ -337,7 +337,8 @@ router.post(`/notifications/unregister`, redirect.unregister)
  * @apiParam {Number} [page_size=50] Return a maximum results
  *
  * @apiExample {curl} Example usage
- * https://public.trustwalletapp.com/tickers?
+ * https://public.trustwalletapp.com/tickers?currency=EUR&page_number=1&page_size=3
+ * https://public.trustwalletapp.com/tickers?ids=1,2,3
  *
  * @apiSuccessExample {json} Sucess-Response:
  *  HTTPS  200 OK
