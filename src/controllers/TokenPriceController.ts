@@ -3,7 +3,7 @@ import { sendJSONresponse } from "../common/Utils";
 import * as winston from "winston";
 import * as BluebirbPromise from "bluebird";
 import { IToken, IPrice, IPriceDB, ICoefficient } from "./Interfaces/ITokenPriceController";
-import { Ticker } from "../models/Currency/TickerModel"
+import { TickerModel } from "../models/Currency/TickerModel"
 import { CurrencyCoefficient } from "../models/Currency/CurrencyCoefficientModel"
 import { contracts } from "../common/tokens/contracts";
 import { setDelay } from "../common/Utils"
@@ -58,7 +58,7 @@ export class TokenPriceController {
 
     private async loadUSDPrice() {
         try {
-            const usdPrices = await Ticker.find({})
+            const usdPrices = await TickerModel.find({})
 
             if (usdPrices.length > 0) {
                 winston.info(`Getting price from db`)
@@ -220,7 +220,7 @@ export class TokenPriceController {
                 }
             })
 
-            return await Ticker.bulkWrite(bulkOps)
+            return await TickerModel.bulkWrite(bulkOps)
 
         } catch (error) {
             winston.error(`Error bulk prices update`, error)
@@ -313,7 +313,7 @@ export class TokenPriceController {
         try {
             const prices: any = await this.getAllTokensPricesInUSD()
             await this.bulkUpdateUSD(prices)
-            const usdPrices: IPriceDB[] = await Ticker.find({})
+            const usdPrices: IPriceDB[] = await TickerModel.find({})
             this.latestUSDPrices = usdPrices
             this.coefficientUpdated.USD = Date.now()
             await this.updateCurrencyCoeffiientInDB("USD", 1)
