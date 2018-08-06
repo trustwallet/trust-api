@@ -3,9 +3,6 @@ import { DApp } from "../models/DAppModel";
 import { DAppCategory } from "../models/DAppCategory";
 import * as xss from "xss-filters";
 import { sendJSONresponse } from "../common/Utils";
-import axios from "axios";
-const config = require("config");
-const _uniqBy = require("lodash.uniqby");
 
 export class DAppsController {
 
