@@ -67,4 +67,4 @@ const schema = new Schema({
 }
 )
 
-export const Ticker = mongoose.model("Ticker", schema)
+export const TickerModel = mongoose.model("Ticker", schema)
