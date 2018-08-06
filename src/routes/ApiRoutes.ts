@@ -1,11 +1,14 @@
 import  * as express from "express";
 import path = require("path");
+// Controllers
 import { DAppsController } from "../controllers/DAppsController";
 import { TokenPriceController } from "../controllers/TokenPriceController";
-import { AppCheck } from "../controllers/AppCheck";
-import { TokenInfo } from "../controllers/TokenInfo";
 import { Redirect } from "../controllers/RedirectController";
 import { Tickers } from "../controllers/TickerController";
+import { AppCheck } from "../controllers/AppCheck";
+import { TokenInfo } from "../controllers/TokenInfo";
+import { Collectibles } from "../controllers/Collectibles/CollectiblesController";
+
 const router = express.Router();
 
 const dAppsController = new DAppsController();
@@ -14,6 +17,7 @@ const appCheck = new AppCheck();
 const tokenInfo = new TokenInfo();
 const redirect = new Redirect()
 const tickers = new Tickers()
+const collectibles = new Collectibles()
 
 // Serve docmentation
 router.use("/docs", express.static(path.join(__dirname, "/../../apidoc")))
@@ -247,6 +251,49 @@ router.post(`/tokens`, redirect.getAddressAllTokens)
  *
  */
 router.get(`/assets`, redirect.getAssets)
+
+/**@api {post} /collectibles
+ * @apiVersion 0.1.0
+ * @apiName GetCollectibles
+ * @apiGroup Collectibles
+ * @apiPermission none
+ *
+ * @apiParam (Request body) {String=60,61,178,820,6060} networkIndex Network coin index
+ * @apiParam (Request body) {String[]} address Address
+ *
+ * @apiParamexample {json} Request Body Example
+ *
+ *  {
+ *    "60": ["0xd3189563ea88bB7E038F36f6F375aAe1e6d3Eb48"]
+ *  }
+ *
+ * @apiSuccessExample {json} Sucess-Response:
+ *      HTTPS  200 OK
+ * {
+ *   "docs": [
+ *      {
+ *          "name": "CryptoKitties",
+ *          "id": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+ *          "items": [
+ *              {
+ *                   "token_id": "511939",
+ *                   "contract_address": "0x06012c8cf97bead5deae237070f9587f8e7a266d",
+ *                  "category": "CryptoKitties",
+ *                   "image_url": "https://s3.us-east-2.amazonaws.com/trustwallet/0x06012c8cf97bead5deae237070f9587f8e7a266d-511939.png",
+ *                  "name": "CryptoKitty #511939",
+ *                   "external_link": "https://www.cryptokitties.co/kitty/511939",
+ *                  "description": "Top o' the muffin to ya! I'm Kitty #511939. I've never told anyone this, but I once meowed for a dog. In my last job, I batted my paw at my manager. Needless to say I was looking for work soon after. It's pawesome to meet you!"
+ *               }
+ *           ],
+ *          "coin": 60,
+ *          "type": "ERC721"
+ *       }
+ *   ]
+ * }
+ *
+ *
+ */
+router.post(`/collectibles`, collectibles.getCollectibles)
 
 /**
  * @api {post} /notifications/register

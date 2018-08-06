@@ -11,6 +11,7 @@ export enum Endpoints {
     TokensList = "tokens/list",
     Tokens = "tokens",
     Assets = "assets",
+    Collectibles = "assets",
     Transactions = "transactions",
     TransactionId = "transactions/",
     RegisterDevice = "push/register",
@@ -25,4 +26,9 @@ export enum CoinTypeIndex {
     callisto = 820,
     gochain = 6060,
     // localhost = 8000 // Uncomment for test pourpouse
+}
+
+export enum ERCStandarts {
+    ERC20 = "ERC20",
+    ERC721 = "ERC721",
 }
