@@ -83,7 +83,8 @@
     "description": "API consumed by the Trust Wallet",
     "apidoc": {
       "titel": "Title",
-      "url": "https://trust-api.herokuapp.com/"
-    }
+      "url": "https://http://public.trustwalletapp.com/"
+    },
+    "sampleUrl": "https://public.trustwalletapp.com"
   }
 }

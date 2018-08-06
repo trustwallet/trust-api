@@ -164,7 +164,10 @@ router.get(`/tokens/list`, redirect.getTokensList)
  * @apiGroup Tokens
  * @apiPermission none
  *
+ * @apiSampleRequest off
+ *
  * @apiParam (Request body) {String[]} networkIndex Array of addresses as a string
+ * @apiParam (Request body) {String[]} address Address
  *
  * @apiParamexample {json} Request Body Example
  *  {
