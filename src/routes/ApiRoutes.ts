@@ -24,8 +24,9 @@ router.use("/docs", express.static(path.join(__dirname, "/../../apidoc")))
 
 router.get("/dapps/main", dAppsController.main);
 router.get("/dapps/category/:id", dAppsController.byCategoryID);
+
 /**
- * @api {post} /tokenPrices
+ * @api {post} /prices
  * @apiVersion 0.1.0
  * @apiName GetTokenPrices
  * @apiGroup Tokens
@@ -34,7 +35,7 @@ router.get("/dapps/category/:id", dAppsController.byCategoryID);
  *
  *
  * @apiExample {curl} Example usage
- * curl -X POST -S -H 'Content-Type: application/json' -d '{"currency":"USD","tokens":[{"contract":"0x1d462414fe14cf489c7a21cac78509f4bf8cd7c0","symbol":"CAN"}]}' -s 'https://public.trustwalletapp.com/tokenPrices'
+ * curl -X POST -S -H 'Content-Type: application/json' -d '{"currency":"USD","tokens":[{"contract":"0x1d462414fe14cf489c7a21cac78509f4bf8cd7c0","symbol":"CAN"}]}' -s 'https://public.trustwalletapp.com/prices'
  *
  * @apiParam {String} currency="USD" For valid fiat currency values refer to https://coinmarketcap.com/api/. Price updates every 5 minutes.
  * @apiParam {Object[]} tokens Token object
@@ -56,7 +57,7 @@ router.get("/dapps/category/:id", dAppsController.byCategoryID);
  *      HTTPS  200 OK
  * {
  *  "status": true,
- *  "response": [
+ *  "docs": [
  *      {
  *          "id": "aston",
  *          "name": "Aston",
@@ -69,7 +70,9 @@ router.get("/dapps/category/:id", dAppsController.byCategoryID);
  *  ]
  * }
  */
-router.post("/tokenPrices", priceController.getTokenPrices);
+router.post("/tokenPrices", priceController.getTokenPrices)
+router.post("/prices", priceController.getTokenPrices)
+
 router.get("/appcheck/android", appCheck.android);
 // Token info
 router.get("/tokeninfo/:networkid/:address?", tokenInfo.getTokenInfo);
