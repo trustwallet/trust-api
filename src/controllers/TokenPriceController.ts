@@ -24,25 +24,36 @@ export class TokenPriceController {
         this.initialize()
     }
 
-    getTokenPrices = (req: Request, res: Response) => {
+    getTokenPrices = async (req: Request, res: Response) => {
         const supportedCurrency: string[] = ["AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR", "USD"]
         const currency: string = supportedCurrency.indexOf(req.body.currency.toUpperCase()) == -1 ? "USD" : req.body.currency.toUpperCase();
         const tokens = req.body.tokens;
 
-        this.getPrices(currency).then((prices: any) => {
-        sendJSONresponse(res, 200, {
-            status: true,
-            response: this.filterTokenPrices(prices, tokens),
-        })
-        })
-        .catch((error: Error) => {
-            winston.error(`Failed to get prices for ${currency}`, error)
+        try {
+            const prices = await this.getPrices(currency)
+            const filtered = this.filterTokenPrices(prices, tokens)
+            const obj = {
+                status: true,
+                response: filtered
+            }
 
+            if (req.originalUrl === "/prices") {
+                delete obj.response
+                obj["docs"] = filtered
+            }
+
+            sendJSONresponse(res, 200, obj)
+        } catch (error) {
+            winston.error(`Failed to get prices for ${currency}`, error)
             sendJSONresponse(res, 500, {
                 status: 500,
-                error,
-            });
-        });
+                error
+            })
+        }
+    }
+
+    public getPrices1 = (req: Request, res: Response) => {
+
     }
 
     private async initialize() {
