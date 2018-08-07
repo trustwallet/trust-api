@@ -2210,5 +2210,41 @@ export const contracts = {
     },
     "0xbc46d9961a3932f7d6b64abfdec80c1816c4b835": {
         id: "litex"
+    },
+    "0x9972a0f24194447e73a7e8b6cd26a52e02ddfad5": {
+        id: "thore-cash"
+    },
+    "0x02e3083a51e8632e571fbd6a62ac396c10c653ba": {
+        id: "eplus-coin"
+    },
+    "0x910dfc18d6ea3d6a7124a6f8b5458f281060fa4c": {
+        id: "x8x-token"
+    },
+    "0x171d750d42d661b62c277a6b486adb82348c3eca": {
+        id: "omnitude"
+    },
+    "0xfa456cf55250a839088b27ee32a424d7dacb54ff": {
+        id: "blocktrade"
+    },
+    "0xc9859fccc876e6b4b3c749c5d29ea04f48acb74f": {
+        id: "ino-coin"
+    },
+    "0xff5c25d2f40b47c4a37f989de933e26562ef0ac0": {
+        id: "kora-network-token"
+    },
+    "0xf1ca9cb74685755965c7458528a36934df52a3ef": {
+        id: "avinoc"
+    },
+    "0x20f7a3ddf244dc9299975b4da1c39f8d5d75f05a": {
+        id: "sapien"
+    },
+    "0x9f195617fa8fbad9540c5d113a99a0a0172aaedc": {
+        id: "niobium-coin"
+    },
+    "0x153ed9cc1b792979d2bde0bbf45cc2a7e436a5f9": {
+        id: "xovbank"
+    },
+    "0xf6276830c265a779a2225b9d2fcbab790cbeb92b": {
+        id: "xceltoken"
     }
 }
