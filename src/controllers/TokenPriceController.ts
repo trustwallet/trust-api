@@ -45,15 +45,12 @@ export class TokenPriceController {
             sendJSONresponse(res, 200, obj)
         } catch (error) {
             winston.error(`Failed to get prices for ${currency}`, error)
+
             sendJSONresponse(res, 500, {
                 status: 500,
                 error
             })
         }
-    }
-
-    public getPrices1 = (req: Request, res: Response) => {
-
     }
 
     private async initialize() {
