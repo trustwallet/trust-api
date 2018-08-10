@@ -2246,5 +2246,89 @@ export const contracts = {
     },
     "0xf6276830c265a779a2225b9d2fcbab790cbeb92b": {
         id: "xceltoken"
+    },
+    "0x567287d4f42086beab4b36de9af21c70adec6760": {
+        id: "latino-token"
+    },
+    "0x8a88f04e0c905054d2f33b26bb3a46d7091a039a": {
+        id: "igtoken"
+    },
+    "0x6aedbf8dff31437220df351950ba2a3362168d1b": {
+        id: "dragonglass"
+    },
+    "0x60c68a87be1e8a84144b543aacfa77199cd3d024": {
+        id: "themis"
+    },
+    "0x74fd51a98a4a1ecbef8cc43be801cce630e260bd": {
+        id: "siacashcoin"
+    },
+    "0x72430a612adc007c50e3b6946dbb1bb0fd3101d1": {
+        id: "thingschain"
+    },
+    "0x054c64741dbafdc19784505494029823d89c3b13": {
+        id: "external-token"
+    },
+    "0x170b275ced089fffaebfe927f445a350ed9160dc": {
+        id: "owndata"
+    },
+    "0x076a93a40bf9e0d21d3f75dd1e0584ddbe0f9d1a": {
+        id: "qurito"
+    },
+    "0x3c4bea627039f0b7e7d21e34bb9c9fe962977518": {
+        id: "ubique-chain-of-things"
+    },
+    "0x17aa18a4b64a55abed7fa543f2ba4e91f2dce482": {
+        id: "insight-chain"
+    },
+    "0xe530441f4f73bdb6dc2fa5af7c3fc5fd551ec838": {
+        id: "gsenetwork"
+    },
+    "0xfa75b65e52a6cbc5503f45f4abba2c5df4688875": {
+        id: "swytch-energy-token"
+    },
+    "0x4b317864a05c91225ab8f401ec7be0aeb87e9c12": {
+        id: "bingocoin"
+    },
+    "0x29536b7ca7029b5cddeb03c0451715615aca35ba": {
+        id: "newstoken"
+    },
+    "0x4c383bdcae52a6e1cb810c76c70d6f31a249ec9b": {
+        id: "rusgas"
+    },
+    "0x851017523ae205adc9195e7f97d029f4cfe7794c": {
+        id: "social-lending-token"
+    },
+    "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33": {
+        id: "clearcoin"
+    },
+    "0x2c594e1cb006e86c3879b1d8191a8b059af52be7": {
+        id: "excaliburcoin"
+    },
+    "0xc16b542ff490e01fcc0dc58a60e1efdc3e357ca6": {
+        id: "ice-rock-mining"
+    },
+    "0xc05d14442a510de4d3d71a3d316585aa0ce32b50": {
+        id: "lina"
+    },
+    "0x87f5e8c3425218837f3cb67db941af0c01323e56": {
+        id: "bitcoin-one"
+    },
+    "0x66bad545596fb17a0b4ebdc003a85def10e8f6ae": {
+        id: "wiki-token"
+    },
+    "0x245ef47d4d0505ecf3ac463f4d81f41ade8f1fd1": {
+        id: "nuggets"
+    },
+    "0x2bdbf15d055899a767f5459a151bed15fb8fd2f6": {
+        id: "ultra-salescoud"
+    },
+    "0x832904863978b94802123106e6eb491bdf0df928": {
+        id: "optitoken"
+    },
+    "0xbb1fa4fdeb3459733bf67ebc6f893003fa976a82": {
+        id: "bitnation"
+    },
+    "0x6a750d255416483bec1a31ca7050c6dac4263b57": {
+        id: "maximine-coin/"
     }
 }
