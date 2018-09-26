@@ -3,19 +3,15 @@ import { sendJSONresponse } from "../common/Utils";
 
 export class AppCheck {
     public android(req: Request, res: Response) {
-        const version = "1.6.112"
-        const build = 285
+        const version = "1.6.137"
+        const build = 313
         sendJSONresponse(res, 200, {
             "latestVersion": version,
             "latestVersionCode": build,
             "url": "https://files.trustwalletapp.com/builds/latest_release.apk",
             "releaseNotes": [
-                    "- Introducing Multi-Coin Wallet to store (ETH, ETC, POA) and all ERC20 tokens",
-                    "- Accelerated the load of prices for coins and tokens.",
-                    "- Wallet naming",
-                    "- Export mnemonic phrase",
-                    "- Push notifications",
-                    "- Improved token UI - clicking on token shows transactions for that token",
+                    "- Support for VeChain and Wanchain",
+                    "- Bugs fixes and perfomance improvements",
             ],
             "title": "Update Available",
             "description": "A new version of Trust Wallet is available. Please update to version " + version,
